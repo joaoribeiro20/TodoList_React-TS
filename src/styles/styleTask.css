@@ -1,0 +1,14 @@
+.divMainTask{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.divMain{
+    background-color: #555;
+    margin: 2%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    color: aliceblue;
+}
