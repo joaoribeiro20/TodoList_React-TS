@@ -1,0 +1,15 @@
+@import "../../styles/styleVariables.scss";
+
+
+.componentToDoList{
+    @include position(center, column, center);
+    width: 50%;
+    margin-top: 5%;
+    text-align: center;
+    background-color: rgb(129, 129, 129); 
+    padding: 2vh;
+
+}
+.componentMainToDoList{
+    @include position(center, column, center);
+  } 

@@ -1,0 +1,10 @@
+$homeMainColor: #534335;
+$headerFooterColor: #2D241B;
+$genericColor: #D6CCC2;
+
+@mixin position($justify_content,$flex-direction,$align-items){
+    display: flex;
+    justify-content: $justify_content;
+    align-items: $align-items;
+    flex-direction: $flex-direction;
+}

@@ -3,3 +3,11 @@
     margin: 0%;
     box-sizing: border-box;
 }
+button{
+    background-color: blue;
+    border: 0px ;
+    padding: 1vh;
+    margin: 2vh;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}

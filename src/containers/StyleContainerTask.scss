@@ -1,0 +1,8 @@
+@import "../styles/styleVariables.scss";
+
+
+.containerToDoListTask{
+    @include position(center, column, center);
+    width: 100%;
+    
+}

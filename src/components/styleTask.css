@@ -4,11 +4,12 @@
     justify-content: space-around;
 }
 .divMain{
-    background-color: #555;
+   background-color: antiquewhite;
+    border-bottom: black 2px solid;
     margin: 2%;
-    width: 50%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    color: aliceblue;
+    color: rgb(0, 0, 0);
 }

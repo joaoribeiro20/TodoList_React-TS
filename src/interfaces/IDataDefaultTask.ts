@@ -1,6 +1,6 @@
 export interface IDataDefaultTask{
-    id: number;
-    text: string;
+    _id: string;
+    description: string;
     categories:string;
     statu:boolean
 }
