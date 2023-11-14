@@ -3,13 +3,30 @@
 
 .componentToDoList{
     @include position(center, column, center);
-    width: 50%;
+    min-width: 80%;
+    max-width: 100%;
     margin-top: 5%;
     text-align: center;
-    background-color: rgb(129, 129, 129); 
     padding: 2vh;
 
 }
+
 .componentMainToDoList{
     @include position(center, column, center);
-  } 
+ 
+} 
+.componentToDoListSesrch{
+    padding: 0vh;
+    margin: 4vh;
+}
+.componentToDoListSesrch button, input{
+   margin:  0%;
+   padding: 7px;
+}
+
+.componentToDoListTask{
+    min-width: 80%;
+    max-width: 100%; 
+    background-color: aliceblue;
+   
+}

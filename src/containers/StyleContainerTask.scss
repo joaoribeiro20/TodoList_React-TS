@@ -2,7 +2,15 @@
 
 
 .containerToDoListTask{
-    @include position(center, column, center);
-    width: 100%;
-    
+  
+}
+.inputPesquisa{
+    background-color: #333333;
+    color: rgb(255, 255, 255);
+    box-shadow: rgba(165, 141, 61, 0.4) 5px 5px,
+    rgba(240, 211, 46, 0.3) 10px 10px,
+     rgba(240, 46, 170, 0.2) 15px 15px, 
+     rgba(240, 46, 170, 0.1) 20px 20px, 
+     rgba(240, 46, 170, 0.05) 25px 25px;
+
 }

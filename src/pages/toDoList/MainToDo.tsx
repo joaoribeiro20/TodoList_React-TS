@@ -1,39 +1,51 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import ContainerTask from "../../containers/ContainerTask";
 
 import "./StyleMainToDo.scss"
+import FormsNewToDo from "../../components/FormsNewToDo";
+
 
 const MainToDo: FC = () => {
+    const [modalCreateToDo, setModalCreateToDo] = useState(false)
+
+    function vizualização() {
+        setModalCreateToDo(!modalCreateToDo)
+    }
+
+    useEffect(() => {
+        // Lógica para ser executada quando modalCreateToDo mudar
+        console.log("modalCreateToDo mudou:", modalCreateToDo);
+    }, [modalCreateToDo]);
+
+
+
     return (
         <>
-        <div className="componentMainToDoList">
-            <div className="componentToDoList">
-                <div className="componentToDoListSesrch">
-                    <input type="text" />
-                    <button>Pesquisar</button>
-                  {/*   //pesquisar por nome da taks */}
+            {
+                modalCreateToDo && (
+                    <div>
+                        <FormsNewToDo sai={vizualização} />
+                    </div>
+                )
+            }
+            <div className="componentMainToDoList">
+                <div className="componentToDoList">
+                    <div className="componentToDoListNewTask">
+                        <button onClick={vizualização}>Create New Task</button>
+                    </div>
+                    <div className="componentToDoListTask">
+                        {
+                            !modalCreateToDo && (
+                                <ContainerTask />
+                            )
+                        }
+                        {
+                            modalCreateToDo && (
+                                <ContainerTask />
+                            )
+                        }
+                    </div>
                 </div>
-                <div className="componentToDoListFilter">
-                    <select name="" id="">
-                        <option value="">Categoria</option>
-                        <option value="">study</option>
-                        <option value="">work</option>
-                        <option value="">person</option>
-                    </select>
-                    <button>Incompletas</button>
-                    <button>Complestas</button>
-                    {/* //filtrar por categoria 
-                    //filtrar por Task incompletas 
-                    //filtrar por taks complestas */}
-                </div> 
-                <div className="componentToDoListNewTask">
-                    <button>Create New Task</button>
-                    {/* //componete de vai permitir criar nova task */}
-                </div>
-                <div className="componentToDoListTask">
-                   <ContainerTask />
-                </div>
-            </div>
             </div>
         </>
     )

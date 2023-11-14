@@ -1,10 +1,7 @@
 export interface IDataDefaultTask{
-    _id: string;
+    _id?: string;
     description: string;
     categories:string;
     statu:boolean
 }
 
-export interface IDataDeTarefas {
-    tarefas: IDataDefaultTask[];
-  }

@@ -2,12 +2,22 @@
     padding: 0%;
     margin: 0%;
     box-sizing: border-box;
+    
+}
+:root{
+    background-image: url(../public/teste1.jpg);
+   
+    background-size: cover;
 }
 button{
-    background-color: blue;
+    background-color: #333333;
+    color: rgb(255, 255, 255);
     border: 0px ;
-    padding: 1vh;
+    padding: 5px;
     margin: 2vh;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
+    
+}
+input{
+    padding: 5px;
+  
 }

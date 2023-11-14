@@ -1,4 +1,4 @@
-
+import { BsFillPencilFill, BsFillTrash3Fill } from "react-icons/bs";
 import { IDataDefaultTask } from "../interfaces/IDataDefaultTask";
 import "./styleTask.css"
 
@@ -12,21 +12,25 @@ const Task: React.FC<IDataDefaultTask  & { onDelete: () => void }> = (props) => 
     return (
         <>
             <div className="divMain" key={_id}>
+                <div className="areaCategoriasData">
+                    <p>{categories.toLocaleUpperCase()}</p>
+                    <p>Data: 00/00/0000 á 00/00/0000</p>
+                   
+                </div>
                 <div className="divMainTask">
-                    <div>
+                    <div className="checkbox">
                         <input type="checkbox" />
                     </div>
-                    <div>
+                    <div className="description">
                         <p>{description}</p>
+                        <hr />
                     </div>
-                    <div>
-                        <button>Editar</button>
-                        <button onClick={excluir}>excluir</button>
+                    <div className="btns">
+                        <button ><BsFillPencilFill  /></button>
+                        <button onClick={excluir}><BsFillTrash3Fill /></button>
                     </div>
                 </div>
-                <div>
-                    <p>{categories}</p>
-                </div>
+                
             </div>
         </>
     )
