@@ -1,4 +1,5 @@
 
+import { TasksContextProvider } from './hooks/UseContextAllTasks'
 import MainToDo from './pages/toDoList/MainToDo'
 
 function App() {
@@ -6,7 +7,10 @@ function App() {
 
   return (
     <>
-     <MainToDo />
+     <TasksContextProvider >
+      <MainToDo />
+    </TasksContextProvider>
+     
     </>
   )
 }

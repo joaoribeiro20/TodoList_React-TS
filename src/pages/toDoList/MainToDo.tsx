@@ -24,16 +24,17 @@ const MainToDo: FC = () => {
             {
                 modalCreateToDo && (
                     <div>
-                        <FormsNewToDo sai={vizualização} />
+                    <FormsNewToDo options="createNew" statu={true} description="" categories="" sai={vizualização} />
                     </div>
                 )
             }
             <div className="componentMainToDoList">
                 <div className="componentToDoList">
-                    <div className="componentToDoListNewTask">
+                   
+                    <div className="componentToDoListTask">
+                        <div className="componentToDoListNewTask">
                         <button onClick={vizualização}>Create New Task</button>
                     </div>
-                    <div className="componentToDoListTask">
                         {
                             !modalCreateToDo && (
                                 <ContainerTask />
@@ -43,7 +44,8 @@ const MainToDo: FC = () => {
                             modalCreateToDo && (
                                 <ContainerTask />
                             )
-                        }
+                        } 
+                        
                     </div>
                 </div>
             </div>

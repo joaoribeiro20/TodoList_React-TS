@@ -2,13 +2,18 @@ import { BsFillPencilFill, BsFillTrash3Fill } from "react-icons/bs";
 import { IDataDefaultTask } from "../interfaces/IDataDefaultTask";
 import "./styleTask.css"
 
-const Task: React.FC<IDataDefaultTask  & { onDelete: () => void }> = (props) => {
-    const { _id, description, categories, onDelete } = props;
+const Task: React.FC<IDataDefaultTask  & { onDelete: () => void, onedit: () => void}> = (props) => {
+    const { _id, description, categories, onDelete, onedit } = props;
 
 
     function excluir(){
         onDelete();
     }
+
+    function edit(){
+        onedit();
+    }
+
     return (
         <>
             <div className="divMain" key={_id}>
@@ -26,7 +31,7 @@ const Task: React.FC<IDataDefaultTask  & { onDelete: () => void }> = (props) => 
                         <hr />
                     </div>
                     <div className="btns">
-                        <button ><BsFillPencilFill  /></button>
+                        <button onClick={edit}><BsFillPencilFill  /></button>
                         <button onClick={excluir}><BsFillTrash3Fill /></button>
                     </div>
                 </div>

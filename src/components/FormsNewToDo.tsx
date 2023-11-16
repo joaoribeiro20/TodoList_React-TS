@@ -1,15 +1,23 @@
 // FormsNewToDo.tsx
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { PostCreateTask } from '../services/PostCreateTask';
 import "./StyleFormsDinamic.scss"
 import { IDataDefaultTask } from '../interfaces/IDataDefaultTask';
+import { editiPatch } from '../services/PatchTask';
+
+interface res{
+    options: string
+    id:string
+}
 
 
 
-const FormsNewToDo: React.FC <{sai: () => void;}>= ({ sai }) => {
+
+const FormsNewToDo: React.FC <{sai: () => void;} & IDataDefaultTask & res>= (props) => {
+
     const [formData, setFormData] = useState<IDataDefaultTask>({
-        description: '',
-        categories: '',
+        description: props.description,
+        categories: props.categories,
         statu: true
     });
 
@@ -30,7 +38,9 @@ const FormsNewToDo: React.FC <{sai: () => void;}>= ({ sai }) => {
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
 
-        try {
+        if(props.options == "createNew"){
+
+              try {
             // Envia a solicitação apenas se os campos estiverem preenchidos
             if (formData.categories && formData.description) {
                 PostCreateTask({
@@ -38,7 +48,7 @@ const FormsNewToDo: React.FC <{sai: () => void;}>= ({ sai }) => {
                     categories: formData.categories,
                     statu: true,
                 });
-                sai();
+                props.sai();
             } else {
                 console.error('Preencha todos os campos antes de enviar.');
             }
@@ -47,7 +57,30 @@ const FormsNewToDo: React.FC <{sai: () => void;}>= ({ sai }) => {
 
         }
 
+        }else if(props.options == "editTask"){
+            try {
+                // Envia a solicitação apenas se os campos estiverem preenchidos
+                if (formData.categories && formData.description) {
+                    editiPatch({
+                        description: formData.description,
+                        categories: formData.categories,
+                        statu: true,
+                    }, props.id);
+                    props.sai();
+                } else {
+                    console.error('Preencha todos os campos antes de enviar.');
+                }
+            } catch (error) {
+                console.error('Erro ao criar tarefa:', error);
+    
+            }
+    
+            editiPatch
+        }
+      
     };
+
+   
 
     return (
         <div className='divMainForms'>
@@ -75,7 +108,11 @@ const FormsNewToDo: React.FC <{sai: () => void;}>= ({ sai }) => {
                             <option value="study">Study</option>
                         </select>
                     </div>
-                    <button type="submit">Create</button>
+                    {
+                        props.options == "editTask" ? (<button type="submit">edit</button>): <button type="submit">create</button>
+                    }
+                    
+                    <button onClick={props.sai}>sair</button>
                 </form>
             </div>
         </div>

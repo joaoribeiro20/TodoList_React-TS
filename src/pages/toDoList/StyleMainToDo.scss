@@ -8,12 +8,13 @@
     margin-top: 5%;
     text-align: center;
     padding: 2vh;
+ 
 
-}
+} 
 
 .componentMainToDoList{
     @include position(center, column, center);
- 
+   
 } 
 .componentToDoListSesrch{
     padding: 0vh;
@@ -28,5 +29,6 @@
     min-width: 80%;
     max-width: 100%; 
     background-color: aliceblue;
+    border-radius: 15px;
    
 }
