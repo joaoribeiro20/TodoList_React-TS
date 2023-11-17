@@ -1,7 +1,7 @@
 // FormsNewToDo.tsx
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { PostCreateTask } from '../services/PostCreateTask';
-import "./StyleFormsDinamic.scss"
+
 import { IDataDefaultTask } from '../interfaces/IDataDefaultTask';
 import { editiPatch } from '../services/PatchTask';
 

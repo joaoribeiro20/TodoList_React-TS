@@ -1,0 +1,34 @@
+.divMain{
+    background-color: beige;
+    margin: 2vh;
+    max-width: 90%;
+    min-width: 90%;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.description{
+    margin: 3vh;
+    max-width: 70%;
+    min-width: 70%;
+}
+
+.divMainTask{
+    margin: 1vh;
+    padding: 1vh;
+
+}
+
+.btns{
+    margin: 0vh;
+    padding: 0vh;
+    button{
+        margin: 0vh;
+        width: 5vh;
+        height: 5vh;
+    }
+    input{
+
+    }
+}

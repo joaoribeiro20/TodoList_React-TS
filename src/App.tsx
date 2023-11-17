@@ -1,16 +1,18 @@
-
-import { TasksContextProvider } from './hooks/UseContextAllTasks'
 import MainToDo from './pages/toDoList/MainToDo'
 
-function App() {
+import { MyContextProvider } from './hooks/teste';
 
+function App() {
+  const contextValue = "Valor do contexto";
 
   return (
     <>
-     <TasksContextProvider >
-      <MainToDo />
-    </TasksContextProvider>
-     
+
+
+      <MyContextProvider value={contextValue}>
+        <MainToDo />
+      </MyContextProvider>
+
     </>
   )
 }

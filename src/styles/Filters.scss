@@ -1,0 +1,38 @@
+
+
+.areaPesquisaBtn{
+    background-color:antiquewhite;
+    display: flex;
+    justify-content: space-between;
+    padding: 2vh;
+    border-radius: 15px;
+    min-width: 65%;
+    max-width: 65%;
+    margin-top: 5vh;
+    input{
+        border: 0cap;
+        background-color:antiquewhite;
+
+    }
+}
+.areaSelect{
+    display: flex;
+    justify-content:flex-end;
+    align-items: end;
+    min-width: 65%;
+    max-width: 65%;
+    text-align: center;
+    margin-top: 5vh;
+    
+    p{
+       
+        margin-bottom: 15px;
+    }
+    select{
+        width: 25vh;
+        padding: 1vh;
+        margin: 2vh;
+        border: 0cap;
+        border-radius: 5px;
+    }
+}
