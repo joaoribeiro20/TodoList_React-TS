@@ -25,20 +25,30 @@ const Task: React.FC<IDataDefaultTask & { onDelete: () => void, onedit: () => vo
 
 
                 <div className="description">
-                    <p>{description}</p>
-                </div>
-{/* -------------------------------------------------------- */}
-                <div className="divMainTask">
-                    <div className="btns">
+                    <div>
                         <input type="checkbox" />
-                        <button onClick={edit}><BsFillPencilFill /></button>
-                        <button onClick={excluir}><BsFillTrash3Fill /></button>
                     </div>
+                    <div>
+                        <p>{description}</p>
+                    </div>
+                    <div className="btns">
+                        <div>
+                            <button onClick={edit}><BsFillPencilFill size={20} /></button>
+                        </div>
+                        <div>
+                            <button onClick={excluir}><BsFillTrash3Fill size={20} /></button>
+                        </div>
+                    </div>
+                </div>
+                {/* -------------------------------------------------------- */}
+                <div className="divMainTask">
+
                     <div className="areaCategoriasData">
-                        <p>{categories.toLocaleUpperCase()}</p>
-                        <p>Data: 00/00/0000 á 00/00/0000</p>
+                        <p><span className="text">Categoria: </span>{categories.toLocaleUpperCase()}</p>
+                        <p><span className="text">Data: </span>00/00/0000 á 00/00/0000</p>
+                       
                     </div>
-{/* -------------------------------------------------------- */}
+                    {/* -------------------------------------------------------- */}
                 </div>
 
 

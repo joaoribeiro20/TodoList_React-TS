@@ -1,18 +1,20 @@
 import { ChangeEvent, FC, useState } from "react"
-import { BsFunnelFill } from "react-icons/bs"
+import { IoAddCircle } from "react-icons/io5";
 import { IDataDefaultTask } from "../interfaces/IDataDefaultTask";
 import FormsNewToDo from "./FormsNewToDo";
-
+import { IoFilter } from "react-icons/io5";
 import "../styles/StyleFormsDinamic.scss"
 import "../styles/Filters.scss"
+import { BsSearch } from "react-icons/bs";
 
 
 interface FiltersProps {
   allTasks: IDataDefaultTask[] | null;
   setFilteredTasks: React.Dispatch<React.SetStateAction<IDataDefaultTask[] | null>>;
+  vis: () => void
 }
 
-const Filters: FC<FiltersProps> = ({ allTasks, setFilteredTasks }) => {
+const Filters: FC<FiltersProps> = ({ allTasks, setFilteredTasks,vis }) => {
   /* const [filteredTasks, setFilteredTasks] = useState<IDataDefaultTask[] | null>(null); */
   const [inputValue, setInputValue] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -42,8 +44,9 @@ const Filters: FC<FiltersProps> = ({ allTasks, setFilteredTasks }) => {
 
   const [modalCreateToDo, setModalCreateToDo] = useState(false)
 
-  function vizualização() {
+  function vizualizacao() {
     setModalCreateToDo(!modalCreateToDo)
+    vis()
   }
 
   return (
@@ -51,21 +54,30 @@ const Filters: FC<FiltersProps> = ({ allTasks, setFilteredTasks }) => {
       {
         modalCreateToDo && (
           <div>
-            <FormsNewToDo options="createNew" statu={true} description="" categories="" sai={vizualização} />
+            <FormsNewToDo id={''} options="createNew" statu={false} description={''} categories={''} sai={vizualizacao}/>
           </div>
         )
       }
       <div className="areaPesquisaBtn">
+        <div className="inputPesquisa"> 
+        <BsSearch size={20}/>
         <input className="inputPesquisa" type="text" value={inputValue} onChange={handleInputChange} placeholder="Pesquise suas tarefas aqui" />
-        <button onClick={vizualização}>Create New Task</button>
+        </div>
+    
+        <div className="btnNewTask">
+           <button onClick={vizualizacao} ><IoAddCircle size={30}/></button>
+           <p>New Task</p>
+        </div>
+       
       </div>
 
       
 <div className="areaSelect">
- <p>Filter</p>
+ <button><IoFilter size={25}/></button>
   <div className="">
         <select name="categoria" id="categoria" value={selectedCategory} onChange={handleCategoryChange}>
-          <option value="">all</option>
+          <option value="">Category</option>
+          
           <option value="study">Study</option>
           <option value="work">Work</option>
           <option value="person">Person</option>
@@ -73,12 +85,14 @@ const Filters: FC<FiltersProps> = ({ allTasks, setFilteredTasks }) => {
       </div>
       <div>
          <select name="status" id="status">
+         <option value="">Filter</option>
+         <option value="">ALL</option>
         <option value="incompletas">Incompletas</option>
         <option value="complestas">Complestas</option>
       </select>
       </div>
 </div>
-      
+
      
 
     </>

@@ -1,34 +1,54 @@
-.divMain{
-    background-color: beige;
-    margin: 2vh;
+.divMain {
+    background-color: #fff1d0;
+    padding: 0%;
+    margin: 0vh;
     max-width: 90%;
     min-width: 90%;
+    max-height: 10%;
+    min-height: 10%;
     display: flex;
-    justify-content:space-between;
+    border-bottom: #000 solid 1px;
     align-items: center;
+ 
 }
 
-.description{
-    margin: 3vh;
+.description {
+
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1vh;
+    padding: 1vh;
     max-width: 70%;
     min-width: 70%;
 }
 
-.divMainTask{
+.divMainTask {
     margin: 1vh;
-    padding: 1vh;
+    padding: 0vh;
 
 }
 
-.btns{
-    margin: 0vh;
-    padding: 0vh;
-    button{
-        margin: 0vh;
-        width: 5vh;
-        height: 5vh;
-    }
-    input{
+.btns {
+display: flex;
+margin: 1vh;
+button {
+       margin: 5px;
+       background-color: #f0c808;
+        border: 0cap;
+        padding: 5px;
+        border-radius: 5px;
+    } 
 
+
+}
+
+.areaCategoriasData{
+    
+   .text{
+        color: #07a0c3;
+        font-size: 20px;
     }
 }

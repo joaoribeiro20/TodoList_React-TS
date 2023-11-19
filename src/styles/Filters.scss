@@ -1,37 +1,74 @@
 
 
 .areaPesquisaBtn{
-    background-color:antiquewhite;
+    background-color:#fff1d0;
     display: flex;
     justify-content: space-between;
-    padding: 2vh;
+    padding: 1vh;
     border-radius: 15px;
     min-width: 65%;
     max-width: 65%;
     margin-top: 5vh;
+    border-bottom: #07a0c3 solid 5px;
+
     input{
         border: 0cap;
-        background-color:antiquewhite;
+        background-color:#fff1d0;
 
     }
 }
+.btnNewTask{
+    padding: 1vh;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    background-color: #f0c808;
+    button{
+        background-color: #f0c808;
+        border: 0cap;
+    }
+   
+}
+
+.inputPesquisa{
+    padding: 1vh;
+    display: flex;
+    align-items: center;
+    
+    input{
+        margin-left: 2vh;
+        min-width: 25vh;
+        max-width: 25vh;
+    }
+}
+
 .areaSelect{
     display: flex;
     justify-content:flex-end;
-    align-items: end;
+           
+    text-align: center;
+    align-items: center;
     min-width: 65%;
     max-width: 65%;
     text-align: center;
     margin-top: 5vh;
     
-    p{
-       
-        margin-bottom: 15px;
-    }
+
     select{
+        background-color: #07a0c3;
+        color: #ffffff;
         width: 25vh;
         padding: 1vh;
         margin: 2vh;
+        border: 0cap;
+        border-radius: 5px;
+    }
+    button{
+        background-color: #ffffff;
+        color: #000000;
+    
+     
         border: 0cap;
         border-radius: 5px;
     }

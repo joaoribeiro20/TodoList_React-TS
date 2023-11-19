@@ -5,15 +5,16 @@ import { PostCreateTask } from '../services/PostCreateTask';
 import { IDataDefaultTask } from '../interfaces/IDataDefaultTask';
 import { editiPatch } from '../services/PatchTask';
 
-interface res{
+interface res {
     options: string
-    id:string
+    id: string
+  
 }
 
 
 
 
-const FormsNewToDo: React.FC <{sai: () => void;} & IDataDefaultTask & res>= (props) => {
+const FormsNewToDo: React.FC<{ sai: () => void; } & IDataDefaultTask & res> = (props) => {
 
     const [formData, setFormData] = useState<IDataDefaultTask>({
         description: props.description,
@@ -37,27 +38,28 @@ const FormsNewToDo: React.FC <{sai: () => void;} & IDataDefaultTask & res>= (pro
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
+      
+        if (props.options == "createNew") {
 
-        if(props.options == "createNew"){
+            try {
+                // Envia a solicitação apenas se os campos estiverem preenchidos
 
-              try {
-            // Envia a solicitação apenas se os campos estiverem preenchidos
-            if (formData.categories && formData.description) {
-                PostCreateTask({
-                    description: formData.description,
-                    categories: formData.categories,
-                    statu: true,
-                });
-                props.sai();
-            } else {
-                console.error('Preencha todos os campos antes de enviar.');
+                if (formData.categories && formData.description) {
+                    PostCreateTask({
+                        description: formData.description,
+                        categories: formData.categories,
+                        statu: true,
+                    });
+                    props.sai();
+                } else {
+                    console.error('Preencha todos os campos antes de enviar.');
+                }
+            } catch (error) {
+                console.error('Erro ao criar tarefa:', error);
+
             }
-        } catch (error) {
-            console.error('Erro ao criar tarefa:', error);
 
-        }
-
-        }else if(props.options == "editTask"){
+        } else if (props.options == "editTask") {
             try {
                 // Envia a solicitação apenas se os campos estiverem preenchidos
                 if (formData.categories && formData.description) {
@@ -72,15 +74,15 @@ const FormsNewToDo: React.FC <{sai: () => void;} & IDataDefaultTask & res>= (pro
                 }
             } catch (error) {
                 console.error('Erro ao criar tarefa:', error);
-    
+
             }
-    
+
             editiPatch
         }
-      
+
     };
 
-   
+
 
     return (
         <div className='divMainForms'>
@@ -89,6 +91,8 @@ const FormsNewToDo: React.FC <{sai: () => void;} & IDataDefaultTask & res>= (pro
                     <label htmlFor="largeTextInput">descriptio task</label>
                     <div>
                         <textarea
+                            rows={6}
+                            cols={50}
                             id="largeTextInput"
                             value={formData.description}
                             onChange={handleLargeTextChange}
@@ -109,9 +113,9 @@ const FormsNewToDo: React.FC <{sai: () => void;} & IDataDefaultTask & res>= (pro
                         </select>
                     </div>
                     {
-                        props.options == "editTask" ? (<button type="submit">edit</button>): <button type="submit">create</button>
+                        props.options == "editTask" ? (<button type="submit" >edit</button>) : <button type="submit">create</button>
                     }
-                    
+
                     <button onClick={props.sai}>sair</button>
                 </form>
             </div>
