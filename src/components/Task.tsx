@@ -1,4 +1,4 @@
-import { BsFillPencilFill, BsFillTrash3Fill } from "react-icons/bs";
+import { BsFillPencilFill, BsFillTrash3Fill, BsPatchCheck, BsPatchCheckFill } from "react-icons/bs";
 import { IDataDefaultTask } from "../interfaces/IDataDefaultTask";
 
 import "../styles/styleTask.scss"
@@ -26,7 +26,7 @@ const Task: React.FC<IDataDefaultTask & { onDelete: () => void, onedit: () => vo
 
                 <div className="description">
                     <div>
-                        <input type="checkbox" />
+                        <button className="check"><BsPatchCheck size={30}/><BsPatchCheckFill size={30}/></button>
                     </div>
                     <div>
                         <p>{description}</p>

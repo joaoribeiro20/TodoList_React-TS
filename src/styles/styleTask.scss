@@ -7,9 +7,17 @@
     max-height: 10%;
     min-height: 10%;
     display: flex;
-    border-bottom: #000 solid 1px;
+    border-left: #07a0c3 solid 10px;
     align-items: center;
+    margin: 1vh;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
  
+}
+
+.check{
+    background-color:#fff1d0;
+    border: 0cap;
 }
 
 .description {
@@ -36,7 +44,7 @@ display: flex;
 margin: 1vh;
 button {
        margin: 5px;
-       background-color: #f0c808;
+       background-color:#fff1d0;
         border: 0cap;
         padding: 5px;
         border-radius: 5px;
