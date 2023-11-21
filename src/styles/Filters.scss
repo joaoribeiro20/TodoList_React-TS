@@ -1,20 +1,22 @@
-
-
+/* 
+#6c5547 
+#a59e96
+*/
 .areaPesquisaBtn{
-    background-color:#fff1d0;
+    background-color:#987e6d;
     display: flex;
     justify-content: space-between;
     padding: 1vh;
     border-radius: 15px;
-    min-width: 65%;
-    max-width: 65%;
+    min-width: 90%;
+    max-width: 100%;
     margin-top: 5vh;
-    border-bottom: #07a0c3 solid 5px;
-
+    border-bottom: #3b2f26 solid 5px;
+    
     input{
         border: 0cap;
-        background-color:#fff1d0;
-
+        background-color:#987e6d;
+        color: #ffffff;
     }
 }
 .btnNewTask{
@@ -23,10 +25,12 @@
     display: flex;
     align-items: center;
     text-align: center;
-    background-color: #f0c808;
+    background-color: #682425;
+    color: #987e6d;
     button{
-        background-color: #f0c808;
+        background-color: #682425;
         border: 0cap;
+        color: #987e6d;
     }
    
 }
@@ -56,8 +60,8 @@
     
 
     select{
-        background-color: #07a0c3;
-        color: #ffffff;
+        background-color: #682425;
+        color: #987e6d;
         width: 25vh;
         padding: 1vh;
         margin: 2vh;
@@ -65,8 +69,8 @@
         border-radius: 5px;
     }
     button{
-        background-color: #ffffff;
-        color: #000000;
+        background-color: #682425;
+        color: #ffffff;
     
      
         border: 0cap;

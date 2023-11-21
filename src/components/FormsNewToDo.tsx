@@ -8,7 +8,6 @@ import { editiPatch } from '../services/PatchTask';
 interface res {
     options: string
     id: string
-  
 }
 
 
@@ -19,7 +18,7 @@ const FormsNewToDo: React.FC<{ sai: () => void; } & IDataDefaultTask & res> = (p
     const [formData, setFormData] = useState<IDataDefaultTask>({
         description: props.description,
         categories: props.categories,
-        statu: true
+        statu: 'true'
     });
 
     const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -48,7 +47,7 @@ const FormsNewToDo: React.FC<{ sai: () => void; } & IDataDefaultTask & res> = (p
                     PostCreateTask({
                         description: formData.description,
                         categories: formData.categories,
-                        statu: true,
+                        statu: 'true'
                     });
                     props.sai();
                 } else {
@@ -66,7 +65,7 @@ const FormsNewToDo: React.FC<{ sai: () => void; } & IDataDefaultTask & res> = (p
                     editiPatch({
                         description: formData.description,
                         categories: formData.categories,
-                        statu: true,
+                        statu: 'true'
                     }, props.id);
                     props.sai();
                 } else {

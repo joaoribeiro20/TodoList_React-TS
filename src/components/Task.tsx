@@ -4,8 +4,8 @@ import { IDataDefaultTask } from "../interfaces/IDataDefaultTask";
 import "../styles/styleTask.scss"
 
 
-const Task: React.FC<IDataDefaultTask & { onDelete: () => void, onedit: () => void }> = (props) => {
-    const { _id, description, categories, onDelete, onedit } = props;
+const Task: React.FC<IDataDefaultTask & { onDelete: () => void, onedit: () => void, onstatus: () => void}> = (props) => {
+    const { statu,_id, description, categories, onDelete, onedit,onstatus } = props;
 
 
     function excluir() {
@@ -14,6 +14,9 @@ const Task: React.FC<IDataDefaultTask & { onDelete: () => void, onedit: () => vo
 
     function edit() {
         onedit();
+    }
+    function status() {
+        onstatus();
     }
 
 
@@ -26,7 +29,11 @@ const Task: React.FC<IDataDefaultTask & { onDelete: () => void, onedit: () => vo
 
                 <div className="description">
                     <div>
-                        <button className="check"><BsPatchCheck size={30}/><BsPatchCheckFill size={30}/></button>
+                        {statu ?(
+                        <button className="check" onClick={status}><BsPatchCheckFill BsPatchCheck size={30}/></button>
+                        ): <button className="check" onClick={status}><BsPatchCheck size={30}/></button>}
+                        
+                        
                     </div>
                     <div>
                         <p>{description}</p>
