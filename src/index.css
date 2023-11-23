@@ -4,10 +4,11 @@
     box-sizing: border-box;
     
 }
-:root{
+body{
     background-image: url(../public/teste2.jpg);
    
     background-size: cover;
+    opacity: 1;
 }
 button{
     /* background-color: #333333; */

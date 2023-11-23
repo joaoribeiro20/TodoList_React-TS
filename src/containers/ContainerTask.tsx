@@ -24,10 +24,10 @@ const ContainerTask: FC = () => {
   const onstatus = (taskId: string) => {
     const updatedTasks = allTasks && allTasks.find((task) => task._id === taskId);
     console.log(updatedTasks?.statu )
-    if(updatedTasks?.statu === "true"){
+    if(updatedTasks?.statu == "true"){
       setStatusTask('false')  
     }
-    if(updatedTasks?.statu === "false"){
+    if(updatedTasks?.statu == "false"){
       setStatusTask('true')
     }
     
