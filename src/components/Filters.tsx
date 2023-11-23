@@ -54,7 +54,7 @@ const Filters: FC<FiltersProps> = ({ allTasks, setFilteredTasks,vis }) => {
       {
         modalCreateToDo && (
           <div>
-            <FormsNewToDo id={''} options="createNew" statu={''} description={''} categories={''} sai={vizualizacao}/>
+            <FormsNewToDo id={''} options="createNew" statu={true} description={''} categories={''} sai={vizualizacao}/>
           </div>
         )
       }
@@ -73,7 +73,7 @@ const Filters: FC<FiltersProps> = ({ allTasks, setFilteredTasks,vis }) => {
 
       
 <div className="areaSelect">
- <button><IoFilter size={25}/></button>
+
   <div className="">
         <select name="categoria" id="categoria" value={selectedCategory} onChange={handleCategoryChange}>
           <option value="">Category</option>
