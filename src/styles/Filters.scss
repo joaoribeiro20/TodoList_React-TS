@@ -12,12 +12,18 @@
     max-width: 100%;
     margin-top: 5vh;
     border-bottom: #3b2f26 solid 5px;
-    
-    input{
-        border: 0cap;
-        background-color:#987e6d;
+    input {
+        border: none; /* Removendo a borda */
+        background-color: #987e6d;
         color: #ffffff;
-    }
+        outline: none; /* Removendo a borda de foco padrão */
+        box-sizing: border-box; /* Garantindo que o preenchimento e a borda não alterem as dimensões totais */
+        
+      }:hover{
+        background-color: #682425;
+        border-radius: 15px;
+        transition-duration: 700ms;
+      }
 }
 .btnNewTask{
     padding: 1vh;

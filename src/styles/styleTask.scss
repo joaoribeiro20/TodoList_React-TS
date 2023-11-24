@@ -15,9 +15,32 @@
  
 }
 
+.divMainComplet1{
+    background-color: #987e6d;
+    padding: 0%;
+    margin: 0vh;
+    max-width: 90%;
+    min-width: 90%;
+    max-height: 10%;
+    min-height: 10%;
+    display: flex;
+    border-left: #682425 solid 10px;
+    align-items: center;
+    margin: 1vh;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    opacity: 0.5;
+    text-decoration: line-through;
+}
+
 .check{
     background-color:#987e6d;
     border: 0cap;
+    :hover{
+    background-color: rgb(0, 136, 45);
+    border-radius: 20px;
+    transition-duration: 700ms;
+}
 }
 
 .description {
@@ -42,6 +65,7 @@
 .btns {
 display: flex;
 margin: 1vh;
+padding: 1vh;
 button {
        margin: 5px;
        background-color:#987e6d;
@@ -51,6 +75,21 @@ button {
     } 
 
 
+}
+.edit{
+
+    :hover{
+        background-color: rgb(216, 212, 0);
+        border-radius: 5px;
+        transition-duration: 700ms;
+    }
+}
+.delete{
+    :hover{
+        background-color: rgb(216, 0, 0);
+        border-radius: 5px;
+        transition-duration: 700ms;
+    }
 }
 
 .areaCategoriasData{

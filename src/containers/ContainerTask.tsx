@@ -4,7 +4,6 @@ import { IDataDefaultTask } from "../interfaces/IDataDefaultTask";
 import Task from "../components/Task";
 import { getAllTasks } from "../services/Get";
 
-import { useAppContext } from "../hooks/teste"
 
 import { DeleteTask } from "../services/DeleteTask";
 
@@ -19,40 +18,29 @@ const ContainerTask: FC = () => {
   const [modalCreateToDo, setModalCreateToDo] = useState(false)
   const [teste, setTeste] = useState<IDataDefaultTask | null>(null);;
   const [loading, setLoading] = useState(true);
-  const [statusTask, setStatusTask] = useState('true');
+  const [statusTasks, setStatusTasks] = useState(true);
+  const [testea, setTestea] = useState(true)
 
-  const onstatus = (taskId: string) => {
+  const onstatus = async (taskId: string) => {
     const updatedTasks = allTasks && allTasks.find((task) => task._id === taskId);
-    console.log(updatedTasks?.statu )
-    if(updatedTasks?.statu == "true"){
-      setStatusTask('false')  
+  
+    if (updatedTasks?.categories && updatedTasks.description) {
+      await editiPatch({
+        description: updatedTasks?.description || "",
+        categories: updatedTasks?.categories || "",
+        statu: !updatedTasks?.statu,
+      }, updatedTasks?._id || '');
+  
+      // Use the functional form to update statusTasks
+      setStatusTasks(prevStatus => !prevStatus);
+  
+      vizualizacao();
     }
-    if(updatedTasks?.statu == "false"){
-      setStatusTask('true')
-    }
-    
-     setTeste({
-      _id: taskId,
-      description: updatedTasks?.description || "",
-      categories: updatedTasks?.categories || '',
-      statu: statusTask
-    }) 
-    if(teste != null){
-       editiPatch(teste,taskId)
-    } else{
-     alert("error a") 
-    }
-   
-   
-  }
-
-
+  };
   /* 
-  
-  
-        Chamada para api, get 
-  
-  
+
+     Chamada para api, get 
+
   */
   useEffect(() => {
     const fetchData = async () => {
@@ -105,13 +93,14 @@ const ContainerTask: FC = () => {
       _id: taskId,
       description: updatedTasks?.description || '',
       categories: updatedTasks?.categories || '',
-      statu: updatedTasks?.statu || 'true'
+      statu: updatedTasks?.statu || true
     })
   };
 
-  const [testea, setTestea] = useState(true)
+
   function vizualizacao() {
     console.log("modalCreateToDo")
+    setModalCreateToDo(true)
     setModalCreateToDo(!modalCreateToDo)
     setTestea(!testea)
     testesla()
@@ -121,23 +110,23 @@ const ContainerTask: FC = () => {
     setTestea(true)
   }
 
-/*    <div className="DivMain">
-            <h2>{count}</h2>
-            <p>{name.nome}</p>
-            <button onClick={()=>{
-              setCount(count + 1)
-            }}>incemento</button> */
+  /*    <div className="DivMain">
+              <h2>{count}</h2>
+              <p>{name.nome}</p>
+              <button onClick={()=>{
+                setCount(count + 1)
+              }}>incemento</button> */
 
- /*  const { count, setCount, name, setName } = useAppContext() */
+  /*  const { count, setCount, name, setName } = useAppContext() */
   return (
     <>
-    
+
       {
         modalCreateToDo && (
           <div>
-            {teste ? 
-            <FormsNewToDo id={teste._id || ''} options="editTask" statu={teste.statu} description={teste.description} categories={teste.categories} sai={vizualizacao} />
-          : <p> legal</p>}</div>
+            {teste ?
+              <FormsNewToDo id={teste._id || ''} options="editTask" statu={teste.statu} description={teste.description} categories={teste.categories} sai={vizualizacao} />
+              : <p></p>}</div>
         )
       }
       {
@@ -157,6 +146,7 @@ const ContainerTask: FC = () => {
                   onDelete={() => handleDelete(task._id || '')}
                   description={task.description}
                   categories={task.categories}
+                  date={task.date}
                   statu={task.statu} />
               ))
             ) : (
