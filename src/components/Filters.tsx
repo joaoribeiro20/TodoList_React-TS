@@ -11,10 +11,10 @@ import { BsSearch } from "react-icons/bs";
 interface FiltersProps {
   allTasks: IDataDefaultTask[] | null;
   setFilteredTasks: React.Dispatch<React.SetStateAction<IDataDefaultTask[] | null>>;
-  vis: () => void
+  statusModalVisivel: () => void
 }
 
-const Filters: FC<FiltersProps> = ({ allTasks, setFilteredTasks, vis }) => {
+const Filters: FC<FiltersProps> = ({ allTasks, setFilteredTasks, statusModalVisivel }) => {
   /* const [filteredTasks, setFilteredTasks] = useState<IDataDefaultTask[] | null>(null); */
   const [inputValue, setInputValue] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -58,20 +58,11 @@ const Filters: FC<FiltersProps> = ({ allTasks, setFilteredTasks, vis }) => {
     setFilteredTasks(filtered);
   };
 
-/*   const handleStatusChange = (evento: ChangeEvent<HTMLSelectElement>) => { 
-  const status = event.target.value; 
-  setSelectedStatus(status); 
-  const filtrado = allTasks && allTasks.filter((task) => { 
-    const descriptionMatch = task.description.includes(inputValue); 
-    const valor = task.statu.toString() 
-    const statusMatch = selectedStatus === 'a' || valor === selecionadoStatus; 
-    console.log(statusMatch) return descriptionMatch && statusMatch; }); setFilteredTasks(filtrado); };
- */
   const [modalCreateToDo, setModalCreateToDo] = useState(false)
 
   function vizualizacao() {
     setModalCreateToDo(!modalCreateToDo)
-    vis()
+    statusModalVisivel()
   }
 
   return (
@@ -80,10 +71,13 @@ const Filters: FC<FiltersProps> = ({ allTasks, setFilteredTasks, vis }) => {
         modalCreateToDo && (
           <div>
             <FormsNewToDo 
-            id={''} options="createNew" 
-            statu={true} description={''} 
+            id={''} 
+            options="createNew" 
+            statu={true} 
+            description={''} 
             categories={''} 
-            sai={vizualizacao} />
+            date={''}
+            statusModalVisivel={vizualizacao} />
           </div>
         )
       }

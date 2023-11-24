@@ -19,7 +19,20 @@ const ContainerTask: FC = () => {
   const [dateUpdate, setDateUpdate] = useState<IDataDefaultTask | null>(null);;
   const [loading, setLoading] = useState(true);
   const [statusTasks, setStatusTasks] = useState(true);
- 
+  const [teste2, setTeste2] = useState(true);
+  const [errorVisible, setErrorVisible] = useState(false);
+
+
+
+  const handleError = () => {
+    setErrorVisible(true);
+  };
+
+  const handleCloseError = () => {
+    setErrorVisible(false);
+  };
+
+
 
   const onstatus = async (taskId: string) => {
     const updatedTasks = allTasks && allTasks.find((task) => task._id === taskId);
@@ -44,7 +57,6 @@ const ContainerTask: FC = () => {
         const tasks = await getAllTasks();
         setAllTasks(tasks);
         setFilteredTasks(tasks);
-
       } catch (error) {
         console.error('Erro ao buscar dados:', error);
       } finally {
@@ -53,7 +65,7 @@ const ContainerTask: FC = () => {
       }
     };
     fetchData();
-  }, [modalCreateToDo]);
+  }, [teste2]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -91,13 +103,14 @@ const ContainerTask: FC = () => {
       date: updatedTasks?.date || '',
       statu: updatedTasks?.statu || true
     });
-  
+    
   };
 
 
   function vizualizacao() {
-    
     setModalCreateToDo(false);
+    setTeste2(prevStatus => !prevStatus);
+
   }
 
 
@@ -123,7 +136,7 @@ const ContainerTask: FC = () => {
                 description={dateUpdate.description}
                 categories={dateUpdate.categories}
                 date={dateUpdate.date}
-                sai={vizualizacao}
+                statusModalVisivel={vizualizacao}
               />
             )}
           </div>
@@ -132,7 +145,7 @@ const ContainerTask: FC = () => {
       
       
           <div className="DivMain">
-            <Filters vis={vizualizacao} allTasks={allTasks} setFilteredTasks={setFilteredTasks} />
+            <Filters statusModalVisivel={vizualizacao} allTasks={allTasks} setFilteredTasks={setFilteredTasks} />
             {loading ? (
               <div className="loading-container">
                 <div className="loading-spinner"></div>

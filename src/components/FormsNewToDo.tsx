@@ -4,16 +4,15 @@ import { PostCreateTask } from '../services/PostCreateTask';
 
 import { IDataDefaultTask } from '../interfaces/IDataDefaultTask';
 import { editiPatch } from '../services/PatchTask';
+import ErrorCard from './ErrorCard';
 
 interface res {
     options: string
     id: string
+    statusModalVisivel: () => void;
 }
 
-
-
-
-const FormsNewToDo: React.FC<{ sai: () => void; } & IDataDefaultTask & res> = (props) => {
+const FormsNewToDo: React.FC<IDataDefaultTask & res> = (props) => {
 
     const [formData, setFormData] = useState<IDataDefaultTask>({
         description: props.description,
@@ -22,6 +21,19 @@ const FormsNewToDo: React.FC<{ sai: () => void; } & IDataDefaultTask & res> = (p
         statu: props.statu
     });
 
+
+
+    const [errorVisible, setErrorVisible] = useState(false);
+
+
+
+    const handleError = () => {
+      setErrorVisible(true);
+    };
+  
+    const handleCloseError = () => {
+      setErrorVisible(false);
+    };
 
     const dateMask = (value: string) => {
         if (!value) return "";
@@ -72,15 +84,17 @@ const FormsNewToDo: React.FC<{ sai: () => void; } & IDataDefaultTask & res> = (p
                             statu: formData.statu
                         }, props.id);
                     }
-                    props.sai();
+                    props.statusModalVisivel();
                 } else {
-                    alert('Preencha todos os campos antes de enviar.');
+                    /* alert('Preencha todos os campos antes de enviar.'); */
+                    handleError()
                 }
             } catch (error) {
                 console.error('Erro ao criar/editar tarefa:', error);
             }
         } else {
-            alert("Data Inválida!!");
+            /* alert("Data Inválida!!"); */
+            handleError()
         }
     };
 
@@ -121,7 +135,12 @@ const FormsNewToDo: React.FC<{ sai: () => void; } & IDataDefaultTask & res> = (p
                     </div>
                     <div>
                         <label>
-                            Escolha uma data:
+                            Escolha uma data:  
+                        </label>
+                       
+                        
+                    </div> 
+                    <div>
                             <input
                                 type="text"
                                 maxLength={8}
@@ -129,15 +148,15 @@ const FormsNewToDo: React.FC<{ sai: () => void; } & IDataDefaultTask & res> = (p
                                 value={formData.date}
                                 onChange={handleChange}
                             />
-                        </label>
-                    </div>
+                        </div>
                     {
                         props.options == "editTask" ? (<button type="submit" >edit</button>) : <button type="submit">create</button>
                     }
 
-                    <button onClick={props.sai}>sair</button>
+                    <button onClick={props.statusModalVisivel}>sair</button>
                 </form>
             </div>
+            {errorVisible && <ErrorCard errorMessage="Ocorreu um erro. Tente novamente." onClose={handleCloseError} />}
         </div>
     );
 };
