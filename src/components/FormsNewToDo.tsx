@@ -25,84 +25,74 @@ const FormsNewToDo: React.FC<{ sai: () => void; } & IDataDefaultTask & res> = (p
 
     const dateMask = (value: string) => {
         if (!value) return "";
-
         value = value.replace(/\D/g, ''); // Remove caracteres não numéricos
-        value = value.replace(/(\d{2})(\d{2})(\d{4})/, '$1/$2/$3'); // Aplica a máscara XX.XXX.XXX/XXXX-XX
-
+        value = value.replace(/(\d{2})(\d{2})(\d{4})/, '$1/$2/$3'); // Aplica a máscara 00/00/0000
         return value;
     };
 
     const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = event.target;
 
-  
+
         if (name === "date") {
             const formattedDate = dateMask(value);
             setFormData((prevFormData) => ({
-              ...prevFormData,
-              [name]: formattedDate,
+                ...prevFormData,
+                [name]: formattedDate,
             }));
-          } else {
+        } else {
             setFormData((prevFormData) => ({
-              ...prevFormData,
-              [name]: value,
+                ...prevFormData,
+                [name]: value,
             }));
-          }
-        };
+        }
+    };
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
 
-        if (props.options == "createNew") {
+        const day = parseInt(formData.date?.replace(/\D/g, '').substring(0, 2) || '', 10);
+        const month = parseInt(formData.date?.replace(/\D/g, '').substring(2, 4) || '', 10);
+        const year = parseInt(formData.date?.replace(/\D/g, '').substring(4, 8) || '', 10);
 
+        if (day <= 31 && month <= 12 && year >= 2023) {
             try {
-                // Envia a solicitação apenas se os campos estiverem preenchidos
-
                 if (formData.categories && formData.description) {
-
-                    PostCreateTask({
-                        description: formData.description,
-                        categories: formData.categories,
-                        date: formData.date,
-                        statu: true
-                    });
+                    if (props.options === "createNew") {
+                        PostCreateTask({
+                            description: formData.description,
+                            categories: formData.categories,
+                            date: formData.date?.replace(/(\d{2})(\d{2})(\d{4})/, '$1/$2/$3'),
+                            statu: true
+                        });
+                    } else if (props.options === "editTask") {
+                        editiPatch({
+                            description: formData.description,
+                            categories: formData.categories,
+                            date: formData.date,
+                            statu: formData.statu
+                        }, props.id);
+                    }
                     props.sai();
                 } else {
                     alert('Preencha todos os campos antes de enviar.');
                 }
             } catch (error) {
-                console.error('Erro ao criar tarefa:', error);
-
+                console.error('Erro ao criar/editar tarefa:', error);
             }
-
-        } else if (props.options == "editTask") {
-            try {
-                // Envia a solicitação apenas se os campos estiverem preenchidos
-                if (formData.categories && formData.description) {
-                    editiPatch({
-                        description: formData.description,
-                        categories: formData.categories,
-                        statu: formData.statu
-                    }, props.id);
-                    props.sai();
-                } else {
-                    console.error('Preencha todos os campos antes de enviar.');
-                }
-            } catch (error) {
-                console.error('Erro ao criar tarefa:', error);
-
-            }
-
-            editiPatch
+        } else {
+            alert("Data Inválida!!");
         }
-
     };
-
 
 
     return (
         <div className='divMainForms'>
             <div className='modal-content '>
+
                 <form onSubmit={handleSubmit}>
+                    {
+                        props.options == "editTask" ? (<h3>Edite sua task</h3>) : <h3 >Crie sua nova task</h3>
+                    }
                     <label htmlFor="largeTextInput">descriptio task</label>
                     <div>
                         <textarea

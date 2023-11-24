@@ -79,7 +79,11 @@ const Filters: FC<FiltersProps> = ({ allTasks, setFilteredTasks, vis }) => {
       {
         modalCreateToDo && (
           <div>
-            <FormsNewToDo id={''} options="createNew" statu={true} description={''} categories={''} sai={vizualizacao} />
+            <FormsNewToDo 
+            id={''} options="createNew" 
+            statu={true} description={''} 
+            categories={''} 
+            sai={vizualizacao} />
           </div>
         )
       }

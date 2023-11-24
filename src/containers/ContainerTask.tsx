@@ -16,39 +16,35 @@ const ContainerTask: FC = () => {
   const [allTasks, setAllTasks] = useState<IDataDefaultTask[] | null>(null);
   const [filteredTasks, setFilteredTasks] = useState<IDataDefaultTask[] | null>(null);
   const [modalCreateToDo, setModalCreateToDo] = useState(false)
-  const [teste, setTeste] = useState<IDataDefaultTask | null>(null);;
+  const [dateUpdate, setDateUpdate] = useState<IDataDefaultTask | null>(null);;
   const [loading, setLoading] = useState(true);
   const [statusTasks, setStatusTasks] = useState(true);
-  const [testea, setTestea] = useState(true)
+ 
 
   const onstatus = async (taskId: string) => {
     const updatedTasks = allTasks && allTasks.find((task) => task._id === taskId);
-  
+
     if (updatedTasks?.categories && updatedTasks.description) {
       await editiPatch({
         description: updatedTasks?.description || "",
         categories: updatedTasks?.categories || "",
         statu: !updatedTasks?.statu,
       }, updatedTasks?._id || '');
-  
-      // Use the functional form to update statusTasks
+
+
       setStatusTasks(prevStatus => !prevStatus);
-  
-      vizualizacao();
+
+
     }
   };
-  /* 
 
-     Chamada para api, get 
-
-  */
   useEffect(() => {
     const fetchData = async () => {
       try {
         const tasks = await getAllTasks();
         setAllTasks(tasks);
         setFilteredTasks(tasks);
-        console.log(tasks)
+
       } catch (error) {
         console.error('Erro ao buscar dados:', error);
       } finally {
@@ -59,14 +55,23 @@ const ContainerTask: FC = () => {
     fetchData();
   }, [modalCreateToDo]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const tasks = await getAllTasks();
+        setAllTasks(tasks);
+        setFilteredTasks(tasks);
 
-  /* 
-  
-  
-        Função de Deletar
-  
-  
-  */
+      } catch (error) {
+        console.error('Erro ao buscar dados:', error);
+      } finally {
+        setInterval
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [statusTasks]);
+
 
   const handleDelete = (taskId: string) => {
     const updatedTasks = allTasks && allTasks.filter((task) => task._id !== taskId);
@@ -75,40 +80,26 @@ const ContainerTask: FC = () => {
     DeleteTask(taskId);
   };
 
-  /* 
-  
-  
-        Função de editar 
-  
-  
-  */
-
-
 
   const handleEdit = (taskId: string) => {
-    setModalCreateToDo(true)
+    setModalCreateToDo(true);
     const updatedTasks = allTasks && allTasks.find((task) => task._id === taskId);
-    console.log(updatedTasks?.description)
-    setTeste({
+    setDateUpdate({
       _id: taskId,
       description: updatedTasks?.description || '',
       categories: updatedTasks?.categories || '',
+      date: updatedTasks?.date || '',
       statu: updatedTasks?.statu || true
-    })
+    });
+  
   };
 
 
   function vizualizacao() {
-    console.log("modalCreateToDo")
-    setModalCreateToDo(true)
-    setModalCreateToDo(!modalCreateToDo)
-    setTestea(!testea)
-    testesla()
+    
+    setModalCreateToDo(false);
   }
 
-  function testesla() {
-    setTestea(true)
-  }
 
   /*    <div className="DivMain">
               <h2>{count}</h2>
@@ -124,13 +115,22 @@ const ContainerTask: FC = () => {
       {
         modalCreateToDo && (
           <div>
-            {teste ?
-              <FormsNewToDo id={teste._id || ''} options="editTask" statu={teste.statu} description={teste.description} categories={teste.categories} sai={vizualizacao} />
-              : <p></p>}</div>
+            {dateUpdate && (
+              <FormsNewToDo
+                id={dateUpdate._id || ''}
+                options="editTask"
+                statu={dateUpdate.statu}
+                description={dateUpdate.description}
+                categories={dateUpdate.categories}
+                date={dateUpdate.date}
+                sai={vizualizacao}
+              />
+            )}
+          </div>
         )
       }
-      {
-        testea ? (
+      
+      
           <div className="DivMain">
             <Filters vis={vizualizacao} allTasks={allTasks} setFilteredTasks={setFilteredTasks} />
             {loading ? (
@@ -153,8 +153,8 @@ const ContainerTask: FC = () => {
               <h1>Nenhuma Tarefa Encontrada</h1>
             )}
           </div>
-        ) : <h2>errro</h2>
-      }
+        
+      
 
     </>
   );
