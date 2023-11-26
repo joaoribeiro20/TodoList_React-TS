@@ -3,7 +3,7 @@ import { IDataDefaultTask } from "../interfaces/IDataDefaultTask";
 
 export const editiPatch = async (Iforms:IDataDefaultTask, id:string): Promise<IDataDefaultTask[]> => {
     try {
-      const response = await axios.patch<IDataDefaultTask[]>(`http://localhost:3000/tasks/${id}`,Iforms);
+      const response = await axios.patch<IDataDefaultTask[]>(`https://apitask-ydt8.onrender.com/tasks/${id}`,Iforms);
       console.log(response)
       return response.data;
     } catch (error) {

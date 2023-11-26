@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const DeleteTask = (id:string) => {
     try {
-      const response = axios.delete(`http://localhost:3000/tasks/${id}`);
+      const response = axios.delete(`https://apitask-ydt8.onrender.com/tasks/${id}`);
       return response;
     } catch (error) {
       console.error('Erro ao buscar dados:', error);

@@ -1,4 +1,4 @@
-import MainToDo from './pages/toDoList/MainToDo'
+import MainToDo from './pages/MainToDo'
 
 import { MyContextProvider } from './hooks/teste';
 
