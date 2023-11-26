@@ -6,14 +6,6 @@
 }
 :root{
     background-image: url(../public/teste3.png);
-   
     background-size: cover;
-    opacity: 1;
-}
-button{
-    /* background-color: #333333; */
-} 
-input{
-    padding: 5px;
-  
+    
 }

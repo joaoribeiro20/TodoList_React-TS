@@ -30,18 +30,18 @@ const Task: React.FC<IDataDefaultTask & { onDelete: () => void, onedit: () => vo
             <div className="description">
                 <div>
                     <button className="check" onClick={handleStatusToggle}>
-                        {statu ? <BsPatchCheck size={30} /> : <BsPatchCheckFill size={30} />}
+                        {statu ? <BsPatchCheck  className="bbIncon"/> : <BsPatchCheckFill  className="bbIncon"/>}
                     </button>
                 </div>
-                <div>
+                <div className="textDescription">
                     <p>{description}</p>
                 </div>
                 <div className="btns">
                     <div>
-                        <button className="edit" onClick={handleEdit}><BsFillPencilFill size={20} /></button>
+                        <button className="edit" onClick={handleEdit}><BsFillPencilFill  className="bbIncontask"/></button>
                     </div>
                     <div>
-                        <button className="delete" onClick={handleDelete}><BsFillTrash3Fill size={20} /></button>
+                        <button className="delete" onClick={handleDelete}><BsFillTrash3Fill  className="bbIncontask"/></button>
                     </div>
                 </div>
             </div>
