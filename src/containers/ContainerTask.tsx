@@ -20,19 +20,7 @@ const ContainerTask: FC = () => {
   const [loading, setLoading] = useState(true);
   const [statusTasks, setStatusTasks] = useState(true);
   const [teste2, setTeste2] = useState(true);
-  const [errorVisible, setErrorVisible] = useState(false);
-
-
-
-  const handleError = () => {
-    setErrorVisible(true);
-  };
-
-  const handleCloseError = () => {
-    setErrorVisible(false);
-  };
-
-
+ 
 
   const onstatus = async (taskId: string) => {
     const updatedTasks = allTasks && allTasks.find((task) => task._id === taskId);
