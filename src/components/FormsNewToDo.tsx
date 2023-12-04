@@ -111,7 +111,7 @@ const FormsNewToDo: React.FC<IDataDefaultTask & res> = (props) => {
                     <div>
                         <textarea
                             rows={6}
-                            cols={50}
+                            cols={30}
                             id="largeTextInput"
                             name='description' // Adicionando o atributo 'name'
                             value={formData.description}

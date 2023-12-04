@@ -1,17 +1,19 @@
 import { createContext, useContext, ReactNode, useState } from 'react';
+import { BsEmojiGrimaceFill } from 'react-icons/bs';
+
 
 /* ---- Criando o context, porem no typescript é necessario informa o tipo do context ---------- */
 /* criando o tipo para o context*/
 type MyContextType = {
-  count: number;
-  setCount: React.Dispatch<React.SetStateAction<number>>; 
-  name: {
-    nome: string;
-    idade: number;
+  Login: {
+    name:string
+    email:string
+    password:string
 };
-  setName:React.Dispatch<React.SetStateAction<{
-    nome: string;
-    idade: number;
+  setLogin:React.Dispatch<React.SetStateAction<{
+    name:string
+    email:string
+    password:string
 }>>
 };
 /* criando o context e dando o tipo criado a cima a ele*/
@@ -27,13 +29,13 @@ type MyContextProviderProps = {
 
 
 const MyContextProvider: React.FC<MyContextProviderProps> = ({ children }) => {
-  const [count, setCount] = useState(0);
-  const [name, setName] = useState({
-    nome: "Joao nome incial",
-    idade: 21
+  const [Login, setLogin] = useState({
+    name:"joao",
+    email:"teste@BsEmojiGrimaceFill.com",
+    password:"123"
 });
   return(
-    <MyContext.Provider value={{ count, setCount, name, setName}}>
+    <MyContext.Provider value={{ Login, setLogin}}>
       {children}
     </MyContext.Provider>
   ) 

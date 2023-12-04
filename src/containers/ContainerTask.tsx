@@ -15,8 +15,10 @@ import { editiPatch } from "../services/PatchTask";
 const ContainerTask: FC = () => {
   const [allTasks, setAllTasks] = useState<IDataDefaultTask[] | null>(null);
   const [filteredTasks, setFilteredTasks] = useState<IDataDefaultTask[] | null>(null);
+
+  const [atulizarTasks, setAtulizarTasks] = useState(true);
   const [modalCreateToDo, setModalCreateToDo] = useState(false)
-  const [dateUpdate, setDateUpdate] = useState<IDataDefaultTask | null>(null);;
+  const [dateUpdate, setDateUpdate] = useState<IDataDefaultTask | null>(null);
   const [loading, setLoading] = useState(true);
   const [statusTasks, setStatusTasks] = useState(true);
   const [teste2, setTeste2] = useState(true);
@@ -39,12 +41,15 @@ const ContainerTask: FC = () => {
     }
   };
 
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const tasks = await getAllTasks();
         setAllTasks(tasks);
         setFilteredTasks(tasks);
+        setAtulizarTasks(true)
       } catch (error) {
         console.error('Erro ao buscar dados:', error);
       } finally {
@@ -53,7 +58,7 @@ const ContainerTask: FC = () => {
       }
     };
     fetchData();
-  }, [teste2]);
+  }, [atulizarTasks]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -97,8 +102,7 @@ const ContainerTask: FC = () => {
 
   function vizualizacao() {
     setModalCreateToDo(false);
-    setTeste2(prevStatus => !prevStatus);
-
+    setAtulizarTasks(false)
   }
 
 

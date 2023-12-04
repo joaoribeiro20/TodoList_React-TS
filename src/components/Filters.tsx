@@ -82,14 +82,13 @@ const Filters: FC<FiltersProps> = ({ allTasks, setFilteredTasks, statusModalVisi
         )
       }
       <div className="areaPesquisaBtn">
-        <div className="inputPesquisa">
-          <BsSearch size={20} />
+        <div className="inputPesquisaG">
+          <BsSearch className="bbIncon" />
           <input className="inputPesquisa" type="text" value={inputValue} onChange={handleInputChange} placeholder="Pesquise suas tarefas aqui" />
         </div>
 
-        <div className="btnNewTask">
-          <button onClick={vizualizacao} ><IoAddCircle size={30} /></button>
-          <p>New Task</p>
+        <div>
+          <button className="btnNewTask" onClick={vizualizacao} ><IoAddCircle className="bbIncon"/>New Task</button>
         </div>
 
       </div>
