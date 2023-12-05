@@ -3,8 +3,8 @@ import { IoAddCircle } from "react-icons/io5";
 import { IDataDefaultTask } from "../interfaces/IDataDefaultTask";
 import FormsNewToDo from "./FormsNewToDo";
 
-import "../styles/StyleFormsDinamic.scss"
-import "../styles/Filters.scss"
+import "../styles/tasks/StyleFormsDinamic.scss"
+import "../styles/tasks/Filters.scss"
 import { BsSearch } from "react-icons/bs";
 
 

@@ -1,4 +1,158 @@
-import { FC, useEffect, useState } from "react";
+import React, { FC, useEffect } from "react";
+import { useAppContext } from "../hooks/InfoUser";
+import { GetUserId } from "../services/GetUserId";
+
+const ContainerTask: FC = () => {
+  const { data, setData } = useAppContext();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (!data) {
+          const valorArmazenado = localStorage.getItem('dadosUser');
+
+          if (valorArmazenado) {
+            const userData = await GetUserId(valorArmazenado);
+            setData(userData);
+          }
+        }
+      } catch (error) {
+        console.error('Erro ao buscar dados do usuário:', error);
+        // Adicione tratamento de erro conforme necessário
+      }
+    };
+
+    fetchData();
+  }, [data, setData]);
+
+  console.log(data);
+
+  return (
+    <>
+      <p>{data ? data.id : 'Carregando...'}</p>
+    </>
+  );
+};
+
+export default ContainerTask;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* import { FC, useEffect, useState } from "react";
 import { IDataDefaultTask } from "../interfaces/IDataDefaultTask";
 
 import Task from "../components/Task";
@@ -9,7 +163,7 @@ import { DeleteTask } from "../services/DeleteTask";
 
 import FormsNewToDo from "../components/FormsNewToDo";
 import Filters from "../components/Filters";
-import "../styles/StyleContainerTask.scss"
+import "../styles/tasks/StyleContainerTask.scss"
 import { editiPatch } from "../services/PatchTask";
 
 const ContainerTask: FC = () => {
@@ -104,65 +258,65 @@ const ContainerTask: FC = () => {
     setModalCreateToDo(false);
     setAtulizarTasks(false)
   }
+ */
 
+/*    <div className="DivMain">
+            <h2>{count}</h2>
+            <p>{name.nome}</p>
+            <button onClick={()=>{
+              setCount(count + 1)
+            }}>incemento</button> */
 
-  /*    <div className="DivMain">
-              <h2>{count}</h2>
-              <p>{name.nome}</p>
-              <button onClick={()=>{
-                setCount(count + 1)
-              }}>incemento</button> */
+/*  const { count, setCount, name, setName } = useAppContext() */
+/* return (
+  <>
 
-  /*  const { count, setCount, name, setName } = useAppContext() */
-  return (
-    <>
-
-      {
-        modalCreateToDo && (
-          <div>
-            {dateUpdate && (
-              <FormsNewToDo
-                id={dateUpdate._id || ''}
-                options="editTask"
-                statu={dateUpdate.statu}
-                description={dateUpdate.description}
-                categories={dateUpdate.categories}
-                date={dateUpdate.date}
-                statusModalVisivel={vizualizacao}
-              />
-            )}
-          </div>
-        )
-      }
+    {
+      modalCreateToDo && (
+        <div>
+          {dateUpdate && (
+            <FormsNewToDo
+              id={dateUpdate._id || ''}
+              options="editTask"
+              statu={dateUpdate.statu}
+              description={dateUpdate.description}
+              categories={dateUpdate.categories}
+              date={dateUpdate.date}
+              statusModalVisivel={vizualizacao}
+            />
+          )}
+        </div>
+      )
+    }
+    
+    
+        <div className="DivMain">
+          <Filters statusModalVisivel={vizualizacao} allTasks={allTasks} setFilteredTasks={setFilteredTasks} />
+          {loading ? (
+            <div className="loading-container">
+              <div className="loading-spinner"></div>
+            </div>
+          ) : filteredTasks && filteredTasks.length ? (
+            filteredTasks.map(task => (
+              <Task
+                onstatus={() => onstatus(task._id || '')}
+                key={task._id} _id={task._id}
+                onedit={() => handleEdit(task._id || '')}
+                onDelete={() => handleDelete(task._id || '')}
+                description={task.description}
+                categories={task.categories}
+                date={task.date}
+                statu={task.statu} />
+            ))
+          ) : (
+            <h1>Nenhuma Tarefa Encontrada</h1>
+          )}
+        </div>
       
-      
-          <div className="DivMain">
-            <Filters statusModalVisivel={vizualizacao} allTasks={allTasks} setFilteredTasks={setFilteredTasks} />
-            {loading ? (
-              <div className="loading-container">
-                <div className="loading-spinner"></div>
-              </div>
-            ) : filteredTasks && filteredTasks.length ? (
-              filteredTasks.map(task => (
-                <Task
-                  onstatus={() => onstatus(task._id || '')}
-                  key={task._id} _id={task._id}
-                  onedit={() => handleEdit(task._id || '')}
-                  onDelete={() => handleDelete(task._id || '')}
-                  description={task.description}
-                  categories={task.categories}
-                  date={task.date}
-                  statu={task.statu} />
-              ))
-            ) : (
-              <h1>Nenhuma Tarefa Encontrada</h1>
-            )}
-          </div>
-        
-      
+    
 
-    </>
-  );
+  </>
+);
 };
 
-export default ContainerTask;
+export default ContainerTask; */

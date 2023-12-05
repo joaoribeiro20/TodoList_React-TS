@@ -1,0 +1,43 @@
+
+  /* Estilo base para o input */
+  .inputPattern {
+    border: none;
+    border-bottom: 1px solid #333; /* Linha na parte inferior */
+    padding: 2px;
+    font-size: 16px;
+    outline: none;
+    transition: border-bottom-color 0.3s ease; /* Adiciona uma transição suave na mudança de cor */
+  }
+  
+  /* Estilo quando o input está focado */
+  .inputPattern:focus {
+    border-bottom-color: #007bff; /* Cor azul quando focado */
+  }
+  
+  /* Estilo para a label */
+  .labelPattern {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #333;
+  }
+
+  .btnCadastrar {
+    margin-top: 5vh;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centraliza horizontalmente */
+    padding: 1vh;
+    width: 100%;
+    background-color: #007bff; /* Cor de fundo azul, ajuste conforme necessário */
+    color: #fff; /* Cor do texto branco, ajuste conforme necessário */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Adiciona uma transição suave na mudança de cor */
+  }
+  
+  .btnCadastrar:hover {
+    background-color: #0056b3; /* Cor de fundo azul mais escura ao passar o mouse, ajuste conforme necessário */
+  }

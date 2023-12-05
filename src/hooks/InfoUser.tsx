@@ -1,20 +1,13 @@
 import { createContext, useContext, ReactNode, useState } from 'react';
-import { BsEmojiGrimaceFill } from 'react-icons/bs';
 
 
+import { IDataUser } from "../interfaces/IDataUser";
 /* ---- Criando o context, porem no typescript é necessario informa o tipo do context ---------- */
 /* criando o tipo para o context*/
+
 type MyContextType = {
-  Login: {
-    name:string
-    email:string
-    password:string
-};
-  setLogin:React.Dispatch<React.SetStateAction<{
-    name:string
-    email:string
-    password:string
-}>>
+  data: IDataUser;
+  setData: React.Dispatch<React.SetStateAction<IDataUser>>;
 };
 /* criando o context e dando o tipo criado a cima a ele*/
 const MyContext = createContext<MyContextType | undefined>(undefined);
@@ -29,13 +22,16 @@ type MyContextProviderProps = {
 
 
 const MyContextProvider: React.FC<MyContextProviderProps> = ({ children }) => {
-  const [Login, setLogin] = useState({
-    name:"joao",
-    email:"teste@BsEmojiGrimaceFill.com",
-    password:"123"
-});
+  const [data, setData] = useState<IDataUser>({
+    name: "",
+    email:"",
+    password:"",
+    telefone:0,
+    apelido:"",
+    cep:0,
+  });
   return(
-    <MyContext.Provider value={{ Login, setLogin}}>
+    <MyContext.Provider value={{ data, setData}}>
       {children}
     </MyContext.Provider>
   ) 

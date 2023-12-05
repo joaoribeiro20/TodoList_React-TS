@@ -1,6 +1,6 @@
 import { BsFillPencilFill, BsFillTrash3Fill, BsPatchCheck, BsPatchCheckFill } from "react-icons/bs";
 import { IDataDefaultTask } from "../interfaces/IDataDefaultTask";
-import "../styles/styleTask.scss";
+import "../styles/tasks/styleTask.scss";
 import { useState, useEffect } from "react";
 
 const Task: React.FC<IDataDefaultTask & { onDelete: () => void, onedit: () => void, onstatus: () => void }> = (props) => {
