@@ -6,10 +6,10 @@ export interface IDataUser{
     telefone:string;
     apelido:string;
     cep:string;
-    tasks?:tasks[]
+    tasks:tasks[]
 }
 export interface tasks{
-    _id?: string;
+    _id: string;
     title: string;
     description:string;
     categories:string;

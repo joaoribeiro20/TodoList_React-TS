@@ -1,19 +1,25 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useAppContext } from "../hooks/InfoUser";
 import { GetUserId } from "../services/GetUserId";
+import { IDataDefaultTask } from "../interfaces/IDataDefaultTask";
+import Task from "../components/Task";
+import Filters from "../components/Filters";
 
 const ContainerTask: FC = () => {
   const { data, setData } = useAppContext();
+  const [allTasks, setAllTasks] = useState<IDataDefaultTask[]>();
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (!data) {
+        if (data.email == '') {
           const valorArmazenado = localStorage.getItem('dadosUser');
-
+          console.log(`valor recuperado ${valorArmazenado}`)
           if (valorArmazenado) {
             const userData = await GetUserId(valorArmazenado);
             setData(userData);
+            setAllTasks(userData.tasks)
           }
         }
       } catch (error) {
@@ -21,15 +27,39 @@ const ContainerTask: FC = () => {
         // Adicione tratamento de erro conforme necessário
       }
     };
-
+    if(data.email != ''){
+      setAllTasks(data.tasks)
+    }
     fetchData();
   }, [data, setData]);
 
-  console.log(data);
+  const onstatus = async (taskId: string) => {
+
+  }
+  const handleDelete = (taskId: string) => {
+
+  }
+  const handleEdit = (taskId: string) => {
+
+  }
 
   return (
     <>
+     <Filters />
       <p>{data ? data.id : 'Carregando...'}</p>
+      <h2>eai {data ?  data.apelido : 'Carregando...'} muito bom ter voce de volta</h2>
+      {allTasks ?
+        allTasks.map(task =>
+          <Task
+            onstatus={() => onstatus(task._id || '')}
+            key={task._id} _id={task._id}
+            onedit={() => handleEdit(task._id || '')}
+            onDelete={() => handleDelete(task._id || '')}
+            description={task.description}
+            categories={task.categories}
+            /*  date={task.date} */
+            statu={task.statu} />)
+        : 'Carregando...'}
     </>
   );
 };
@@ -238,8 +268,8 @@ const ContainerTask: FC = () => {
     setFilteredTasks(updatedTasks);
     DeleteTask(taskId);
   };
-
-
+const onstatus = async (taskId: string) => {
+ const handleDelete = (taskId: string) => {
   const handleEdit = (taskId: string) => {
     setModalCreateToDo(true);
     const updatedTasks = allTasks && allTasks.find((task) => task._id === taskId);

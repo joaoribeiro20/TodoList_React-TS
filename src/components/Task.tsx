@@ -4,12 +4,12 @@ import "../styles/tasks/styleTask.scss";
 import { useState, useEffect } from "react";
 
 const Task: React.FC<IDataDefaultTask & { onDelete: () => void, onedit: () => void, onstatus: () => void }> = (props) => {
-    const { statu, _id, description, categories,date, onDelete, onedit, onstatus } = props;
-    const [classDinamic, setClassDinamic] = useState(statu ? "divMain" : "divMainComplet1");
+    const { statu, _id, description, categories, date, onDelete, onedit, onstatus } = props;
+    const [classDinamic, setClassDinamic] = useState(statu ? "divMainComplet1" : "divMain");
 
     useEffect(() => {
         // Update classDinamic whenever statu changes
-        setClassDinamic(statu ? "divMain" : "divMainComplet1");
+        setClassDinamic(statu ? "divMainComplet1" : "divMain");
     }, [statu]);
 
     function handleStatusToggle() {
