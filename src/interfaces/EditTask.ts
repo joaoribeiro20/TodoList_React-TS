@@ -1,13 +1,15 @@
+import { editiPatch } from "../services/tasks/PatchTask";
 import { IDataDefaultTask } from "./IDataDefaultTask";
 
-/* export const editTask = (taskId: string, allTasks:IDataDefaultTask[]) => {
-setModalCreateToDo(true);
+export const editTask = (taskId: string, allTasks:IDataDefaultTask[]) => {
     const updatedTasks = allTasks && allTasks.find((task) => task.id === taskId);
-    setDateUpdate({
-      id: taskId,
-      description: updatedTasks?.description || '',
-      categories: updatedTasks?.categories || '',
-      date: updatedTasks?.date || '',
-      statu: updatedTasks?.statu || true
-    });
-} */
+/*     editiPatch({
+      id:updatedTasks?.id,
+      title:updatedTasks?.title!,
+      description:updatedTasks?.description!,
+      categories:updatedTasks?.categories!,
+      statu:updatedTasks?.statu!,
+      authorId:updatedTasks?.authorId!
+    }); */
+    return updatedTasks
+}

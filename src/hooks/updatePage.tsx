@@ -1,13 +1,13 @@
 import { createContext, useContext, ReactNode, useState } from 'react';
 
 
-import { IDataUser } from "../interfaces/IDataUser";
+
 /* ---- Criando o context, porem no typescript é necessario informa o tipo do context ---------- */
 /* criando o tipo para o context*/
 
 type MyContextType = {
-  data: IDataUser;
-  setData: React.Dispatch<React.SetStateAction<IDataUser>>;
+  update: number;
+  setUpdate: React.Dispatch<React.SetStateAction<number>>;
 };
 /* criando o context e dando o tipo criado a cima a ele*/
 const MyContext = createContext<MyContextType | undefined>(undefined);
@@ -22,23 +22,16 @@ type MyContextProviderProps = {
 
 
 const MyContextProvider: React.FC<MyContextProviderProps> = ({ children }) => {
-  const [data, setData] = useState<IDataUser>({
-    name: "",
-    email:"",
-    password:"",
-    telefone:'0',
-    apelido:"",
-    cep:0,
-  });
+  const [update, setUpdate] = useState(0);
   return(
-    <MyContext.Provider value={{ data, setData}}>
+    <MyContext.Provider value={{ update, setUpdate}}>
       {children}
     </MyContext.Provider>
   ) 
 }
 
 
- function useAppContext(){
+ function useUpdateContext(){
     const context = useContext(MyContext)
     
 
@@ -48,4 +41,4 @@ const MyContextProvider: React.FC<MyContextProviderProps> = ({ children }) => {
     return context
 }
 
-export { MyContextProvider, useAppContext };
+export { MyContextProvider, useUpdateContext };

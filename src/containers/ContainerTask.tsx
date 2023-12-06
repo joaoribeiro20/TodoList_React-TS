@@ -5,6 +5,7 @@ import { IDataDefaultTask } from "../interfaces/IDataDefaultTask";
 import Task from "../components/Task";
 import Filters from "../components/Filters";
 import { Delete } from "../interfaces/DeleteTask";
+import { editTask } from "../interfaces/EditTask";
 
 const ContainerTask: FC = () => {
   const { data, setData } = useAppContext();
@@ -22,14 +23,14 @@ const ContainerTask: FC = () => {
             const userData = await GetUserId(valorArmazenado);
             setData(userData);
             setAllTasks(userData.tasks)
-           
+
           }
         }
       } catch (error) {
         console.error('Erro ao buscar dados do usuário:', error);
       }
     };
-    if(data.email != ''){
+    if (data.email != '') {
       setAllTasks(data.tasks)
     }
     fetchData();
@@ -37,31 +38,31 @@ const ContainerTask: FC = () => {
   }, [data, setData]);
 
 
- useEffect(() =>{
+  useEffect(() => {
     const fetchDate = async () => {
       try {
         console.log("useEffect2")
         const valorArmazenado = localStorage.getItem('dadosUser');
-        if(valorArmazenado) {
-           const userData = await GetUserId(valorArmazenado);
-            setData(userData);
-            setAllTasks(userData.tasks)
+        if (valorArmazenado) {
+          const userData = await GetUserId(valorArmazenado);
+          setData(userData);
+          setAllTasks(userData.tasks)
         }
-          }
-       catch (error) {
+      }
+      catch (error) {
         console.error('Erro ao buscar dados do usuário:', error);
       }
     }
 
     fetchDate();
-  },[updatePage, setUpadatePage]) 
+  }, [updatePage, setUpadatePage])
 
   const onstatus = async (taskId: string) => {
 
   }
   const handleDelete = (taskId: string) => {
     allTasks && setAllTasks(Delete(taskId, allTasks))
-    const myTimeout = setTimeout(()=>{setUpadatePage(2)}, 5000);
+    const myTimeout = setTimeout(() => { setUpadatePage(2) }, 5000);
   }
   const handleEdit = (taskId: string) => {
 
@@ -69,10 +70,11 @@ const ContainerTask: FC = () => {
 
   return (
     <>
-     <Filters Tid={data.id ? data.id : ""} allTasks={data.tasks} setFilteredTasks={setAllTasks!}/>
+      <Filters idUserCreateTask={data.id ? data.id : ""} setUpadatePage={setUpadatePage} allTasks={data.tasks} setFilteredTasks={setAllTasks!} />
       {allTasks ?
         allTasks.map(task =>
           <Task
+            setUpadatePage={setUpadatePage}
             onstatus={() => onstatus(task.id || '')}
             key={task.id} id={task.id}
             onedit={() => handleEdit(task.id || '')}
@@ -80,7 +82,7 @@ const ContainerTask: FC = () => {
             title={task.title}
             description={task.description}
             categories={task.categories}
-            authorId={task.authorId} 
+            authorId={task.authorId}
             statu={task.statu} />)
         : 'Carregando...'}
     </>

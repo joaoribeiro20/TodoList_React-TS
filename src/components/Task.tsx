@@ -3,11 +3,21 @@ import { IDataDefaultTask } from "../interfaces/IDataDefaultTask";
 import "../styles/tasks/styleTask.scss";
 import { useState, useEffect } from "react";
 import FormsNewToDo from "./FormsNewToDo";
+import { useAppContext } from "../hooks/InfoUser";
+import { editTask } from "../interfaces/EditTask";
 
+interface FiltersProps{
+    setUpadatePage: React.Dispatch<React.SetStateAction<number>>;
+    onDelete: () => void, 
+    onedit: () => void, 
+    onstatus: () => void 
+}
 
-const Task: React.FC<IDataDefaultTask & { onDelete: () => void, onedit: () => void, onstatus: () => void }> = (props) => {
+const Task: React.FC<IDataDefaultTask & FiltersProps> = (props,setUpadatePage,) => {
     const { statu, id, title, description, categories, onDelete, onedit, onstatus } = props;
     const [classDinamic, setClassDinamic] = useState(statu ? "divMainComplet1" : "divMain");
+    const { data, setData } = useAppContext();
+    const [updatedTasks, setUpdatedTasks] = useState<IDataDefaultTask>();
 
     useEffect(() => {
         // Update classDinamic whenever statu changes
@@ -20,6 +30,8 @@ const Task: React.FC<IDataDefaultTask & { onDelete: () => void, onedit: () => vo
     }
 
     function handleEdit(taskId: string) {
+       
+        setUpdatedTasks(data.tasks && data.tasks.find((task) => task.id === taskId)) 
         vizualizacao()
         console.log(taskId)
         onedit();
@@ -36,19 +48,24 @@ const Task: React.FC<IDataDefaultTask & { onDelete: () => void, onedit: () => vo
       
     }
 
+    function updatePage(){
+        setUpadatePage(Math.random() * 10) 
+      }
+
     return (
         <>
          {
         modalCreateToDo && (
           <div>
             <FormsNewToDo 
-            id={''} 
-            options="createNew" 
+            id={updatedTasks?.id!} 
+            options="editTask" 
             statu={true} 
-            title={''}
-            description={''} 
-            categories={''} 
-            authorId={''}
+            title={updatedTasks?.title!}
+            description={updatedTasks?.description!} 
+            categories={updatedTasks?.categories!} 
+            authorId={updatedTasks?.authorId!}
+            updatePage={updatePage}
             statusModalVisivel={vizualizacao} />
           </div>
         )

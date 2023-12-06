@@ -10,11 +10,13 @@ interface res {
     options: string
     id: string
     statusModalVisivel: () => void;
+    updatePage: ()=> void
 }
 
 const FormsNewToDo: React.FC<IDataDefaultTask & res> = (props) => {
 
     const [formData, setFormData] = useState<IDataDefaultTask>({
+        id:props.id,
         description: props.description,
         categories: props.categories,
         title: props.title,
@@ -77,19 +79,22 @@ const FormsNewToDo: React.FC<IDataDefaultTask & res> = (props) => {
                         categories: formData.categories,
                         statu:formData.statu,
                         authorId: formData.authorId,
-                        
                     });
+                    props.updatePage
                 } else if (props.options === "editTask") {
                     editiPatch({
+                        id:formData.id,
                         description: formData.description,
                         categories: formData.categories,
                         title: formData.title,
                         authorId: formData.authorId,
-                        /* date: formData.date?.replace(/(\d{2})(\d{2})(\d{4})/, '$1/$2/$3'), */
-                        statu: true
-                    }, props.id);
+                        statu: false
+                    }); 
+                
                 }
+                
                 props.statusModalVisivel();
+               
             } else {
                 /* alert('Preencha todos os campos antes de enviar.'); */
                 handleError()

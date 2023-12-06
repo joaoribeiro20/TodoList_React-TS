@@ -10,12 +10,13 @@ import { BsSearch } from "react-icons/bs";
 
 interface FiltersProps {
   allTasks: IDataDefaultTask[] | null;
-  setFilteredTasks: React.Dispatch<React.SetStateAction<IDataDefaultTask[] | null>>;
-  Tid:string
+  idUserCreateTask:string
+   setFilteredTasks: React.Dispatch<React.SetStateAction<IDataDefaultTask[] | null>>;
+   setUpadatePage: React.Dispatch<React.SetStateAction<number>>;
   /* statusModalVisivel: () => void */
 }
 
-const Filters: FC<FiltersProps> = ({ allTasks, setFilteredTasks, Tid }) => {
+const Filters: FC<FiltersProps> = ({ allTasks, setFilteredTasks, setUpadatePage, idUserCreateTask }) => {
   /* const [filteredTasks, setFilteredTasks] = useState<IDataDefaultTask[] | null>(null); */
   const [inputValue, setInputValue] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -43,6 +44,9 @@ const Filters: FC<FiltersProps> = ({ allTasks, setFilteredTasks, Tid }) => {
     setFilteredTasks(filtered);
   };
 
+  const updatePage = ()=>{
+    setUpadatePage(Math.random() * 10)
+  }
 
   const handleStatusChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const status = event.target.value;
@@ -78,8 +82,9 @@ const Filters: FC<FiltersProps> = ({ allTasks, setFilteredTasks, Tid }) => {
             title={''}
             description={''} 
             categories={''} 
-            authorId={Tid}
-            statusModalVisivel={vizualizacao} />
+            authorId={idUserCreateTask}
+            statusModalVisivel={vizualizacao}
+            updatePage={updatePage} />
           </div>
         )
       }
