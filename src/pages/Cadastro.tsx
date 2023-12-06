@@ -4,7 +4,7 @@ import "../styles/Cadastro.scss"
 
 /* import {useAppContext} from "../hooks/teste" */
 import DynamicForm from '../components/DynamicForm';
-import { CreateUser } from "../services/CreateUser";
+import { CreateUser } from "../services/users/CreateUser";
 import { IDataUser } from "../interfaces/IDataUser";
 
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IDataUser } from "../interfaces/IDataUser";
+import { IDataUser } from "../../interfaces/IDataUser";
 
 export const GetUserId = async (id:string): Promise<IDataUser> => {
     try {

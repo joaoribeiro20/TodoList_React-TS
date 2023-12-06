@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "../styles/Login.scss";
 import { useAppContext } from "../hooks/InfoUser";
 import DynamicForm from '../components/DynamicForm';
-import { getUser } from "../services/GetUser";
+import { getUser } from "../services/users/GetUser";
 import { IDataUser } from "../interfaces/IDataUser";
 
 

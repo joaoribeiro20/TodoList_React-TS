@@ -11,10 +11,11 @@ import { BsSearch } from "react-icons/bs";
 interface FiltersProps {
   allTasks: IDataDefaultTask[] | null;
   setFilteredTasks: React.Dispatch<React.SetStateAction<IDataDefaultTask[] | null>>;
-  statusModalVisivel: () => void
+  Tid:string
+  /* statusModalVisivel: () => void */
 }
 
-const Filters: FC<FiltersProps> = ({ allTasks, setFilteredTasks, statusModalVisivel }) => {
+const Filters: FC<FiltersProps> = ({ allTasks, setFilteredTasks, Tid }) => {
   /* const [filteredTasks, setFilteredTasks] = useState<IDataDefaultTask[] | null>(null); */
   const [inputValue, setInputValue] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -62,7 +63,7 @@ const Filters: FC<FiltersProps> = ({ allTasks, setFilteredTasks, statusModalVisi
 
   function vizualizacao() {
     setModalCreateToDo(!modalCreateToDo)
-    statusModalVisivel()
+    
   }
 
   return (
@@ -74,9 +75,10 @@ const Filters: FC<FiltersProps> = ({ allTasks, setFilteredTasks, statusModalVisi
             id={''} 
             options="createNew" 
             statu={true} 
+            title={''}
             description={''} 
             categories={''} 
-            date={''}
+            authorId={Tid}
             statusModalVisivel={vizualizacao} />
           </div>
         )

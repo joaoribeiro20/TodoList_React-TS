@@ -1,14 +1,15 @@
-import React, { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useAppContext } from "../hooks/InfoUser";
-import { GetUserId } from "../services/GetUserId";
+import { GetUserId } from "../services/users/GetUserId";
 import { IDataDefaultTask } from "../interfaces/IDataDefaultTask";
 import Task from "../components/Task";
 import Filters from "../components/Filters";
+import { Delete } from "../interfaces/DeleteTask";
 
 const ContainerTask: FC = () => {
   const { data, setData } = useAppContext();
-  const [allTasks, setAllTasks] = useState<IDataDefaultTask[]>();
-
+  const [allTasks, setAllTasks] = useState<IDataDefaultTask[] | null>([]);
+  const [updatePage, setUpadatePage] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,27 +18,50 @@ const ContainerTask: FC = () => {
           const valorArmazenado = localStorage.getItem('dadosUser');
           console.log(`valor recuperado ${valorArmazenado}`)
           if (valorArmazenado) {
+            console.log("useEffect1")
             const userData = await GetUserId(valorArmazenado);
             setData(userData);
             setAllTasks(userData.tasks)
+           
           }
         }
       } catch (error) {
         console.error('Erro ao buscar dados do usuário:', error);
-        // Adicione tratamento de erro conforme necessário
       }
     };
     if(data.email != ''){
       setAllTasks(data.tasks)
     }
     fetchData();
+
   }, [data, setData]);
+
+
+ useEffect(() =>{
+    const fetchDate = async () => {
+      try {
+        console.log("useEffect2")
+        const valorArmazenado = localStorage.getItem('dadosUser');
+        if(valorArmazenado) {
+           const userData = await GetUserId(valorArmazenado);
+            setData(userData);
+            setAllTasks(userData.tasks)
+        }
+          }
+       catch (error) {
+        console.error('Erro ao buscar dados do usuário:', error);
+      }
+    }
+
+    fetchDate();
+  },[updatePage, setUpadatePage]) 
 
   const onstatus = async (taskId: string) => {
 
   }
   const handleDelete = (taskId: string) => {
-
+    allTasks && setAllTasks(Delete(taskId, allTasks))
+    const myTimeout = setTimeout(()=>{setUpadatePage(2)}, 5000);
   }
   const handleEdit = (taskId: string) => {
 
@@ -45,19 +69,18 @@ const ContainerTask: FC = () => {
 
   return (
     <>
-     <Filters />
-      <p>{data ? data.id : 'Carregando...'}</p>
-      <h2>eai {data ?  data.apelido : 'Carregando...'} muito bom ter voce de volta</h2>
+     <Filters Tid={data.id ? data.id : ""} allTasks={data.tasks} setFilteredTasks={setAllTasks!}/>
       {allTasks ?
         allTasks.map(task =>
           <Task
-            onstatus={() => onstatus(task._id || '')}
-            key={task._id} _id={task._id}
-            onedit={() => handleEdit(task._id || '')}
-            onDelete={() => handleDelete(task._id || '')}
+            onstatus={() => onstatus(task.id || '')}
+            key={task.id} id={task.id}
+            onedit={() => handleEdit(task.id || '')}
+            onDelete={() => handleDelete(task.id || '')}
+            title={task.title}
             description={task.description}
             categories={task.categories}
-            /*  date={task.date} */
+            authorId={task.authorId} 
             statu={task.statu} />)
         : 'Carregando...'}
     </>
@@ -209,14 +232,14 @@ const ContainerTask: FC = () => {
  
 
   const onstatus = async (taskId: string) => {
-    const updatedTasks = allTasks && allTasks.find((task) => task._id === taskId);
+    const updatedTasks = allTasks && allTasks.find((task) => task.id === taskId);
 
     if (updatedTasks?.categories && updatedTasks.description) {
       await editiPatch({
         description: updatedTasks?.description || "",
         categories: updatedTasks?.categories || "",
         statu: !updatedTasks?.statu,
-      }, updatedTasks?._id || '');
+      }, updatedTasks?.id || '');
 
 
       setStatusTasks(prevStatus => !prevStatus);
@@ -263,18 +286,16 @@ const ContainerTask: FC = () => {
 
 
   const handleDelete = (taskId: string) => {
-    const updatedTasks = allTasks && allTasks.filter((task) => task._id !== taskId);
+    const updatedTasks = allTasks && allTasks.filter((task) => task.id !== taskId);
     setAllTasks(updatedTasks);
     setFilteredTasks(updatedTasks);
     DeleteTask(taskId);
   };
-const onstatus = async (taskId: string) => {
- const handleDelete = (taskId: string) => {
-  const handleEdit = (taskId: string) => {
+
     setModalCreateToDo(true);
-    const updatedTasks = allTasks && allTasks.find((task) => task._id === taskId);
+    const updatedTasks = allTasks && allTasks.find((task) => task.id === taskId);
     setDateUpdate({
-      _id: taskId,
+      id: taskId,
       description: updatedTasks?.description || '',
       categories: updatedTasks?.categories || '',
       date: updatedTasks?.date || '',
@@ -306,7 +327,7 @@ const onstatus = async (taskId: string) => {
         <div>
           {dateUpdate && (
             <FormsNewToDo
-              id={dateUpdate._id || ''}
+              id={dateUpdate.id || ''}
               options="editTask"
               statu={dateUpdate.statu}
               description={dateUpdate.description}
@@ -329,10 +350,10 @@ const onstatus = async (taskId: string) => {
           ) : filteredTasks && filteredTasks.length ? (
             filteredTasks.map(task => (
               <Task
-                onstatus={() => onstatus(task._id || '')}
-                key={task._id} _id={task._id}
-                onedit={() => handleEdit(task._id || '')}
-                onDelete={() => handleDelete(task._id || '')}
+                onstatus={() => onstatus(task.id || '')}
+                key={task.id} id={task.id}
+                onedit={() => handleEdit(task.id || '')}
+                onDelete={() => handleDelete(task.id || '')}
                 description={task.description}
                 categories={task.categories}
                 date={task.date}

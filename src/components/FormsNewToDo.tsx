@@ -1,9 +1,9 @@
 // FormsNewToDo.tsx
 import React, { ChangeEvent, useState } from 'react';
-import { PostCreateTask } from '../services/PostCreateTask';
+import { PostCreateTask } from '../services/tasks/PostCreateTask';
 
 import { IDataDefaultTask } from '../interfaces/IDataDefaultTask';
-import { editiPatch } from '../services/PatchTask';
+import { editiPatch } from '../services/tasks/PatchTask';
 import ErrorCard from './ErrorCard';
 
 interface res {
@@ -17,7 +17,8 @@ const FormsNewToDo: React.FC<IDataDefaultTask & res> = (props) => {
     const [formData, setFormData] = useState<IDataDefaultTask>({
         description: props.description,
         categories: props.categories,
-        date: props.date,
+        title: props.title,
+        authorId: props.authorId,
         statu: props.statu
     });
 
@@ -28,11 +29,11 @@ const FormsNewToDo: React.FC<IDataDefaultTask & res> = (props) => {
 
 
     const handleError = () => {
-      setErrorVisible(true);
+        setErrorVisible(true);
     };
-  
+
     const handleCloseError = () => {
-      setErrorVisible(false);
+        setErrorVisible(false);
     };
 
     const dateMask = (value: string) => {
@@ -61,41 +62,46 @@ const FormsNewToDo: React.FC<IDataDefaultTask & res> = (props) => {
     };
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
+        /* 
+                const day = parseInt(formData.date?.replace(/\D/g, '').substring(0, 2) || '', 10);
+                const month = parseInt(formData.date?.replace(/\D/g, '').substring(2, 4) || '', 10);
+                const year = parseInt(formData.date?.replace(/\D/g, '').substring(4, 8) || '', 10); */
 
-        const day = parseInt(formData.date?.replace(/\D/g, '').substring(0, 2) || '', 10);
-        const month = parseInt(formData.date?.replace(/\D/g, '').substring(2, 4) || '', 10);
-        const year = parseInt(formData.date?.replace(/\D/g, '').substring(4, 8) || '', 10);
-
-        if (day <= 31 && month <= 12 && year >= 2023) {
-            try {
-                if (formData.categories && formData.description) {
-                    if (props.options === "createNew") {
-                        PostCreateTask({
-                            description: formData.description,
-                            categories: formData.categories,
-                            date: formData.date?.replace(/(\d{2})(\d{2})(\d{4})/, '$1/$2/$3'),
-                            statu: true
-                        });
-                    } else if (props.options === "editTask") {
-                        editiPatch({
-                            description: formData.description,
-                            categories: formData.categories,
-                            date: formData.date,
-                            statu: formData.statu
-                        }, props.id);
-                    }
-                    props.statusModalVisivel();
-                } else {
-                    /* alert('Preencha todos os campos antes de enviar.'); */
-                    handleError()
+        /*  if (day <= 31 && month <= 12 && year >= 2023) {} */
+        try {
+            if (formData.categories && formData.description) {
+                if (props.options === "createNew") {
+                    PostCreateTask({
+                        title: formData.title,
+                        description: formData.description,
+                        categories: formData.categories,
+                        statu:formData.statu,
+                        authorId: formData.authorId,
+                        
+                    });
+                } else if (props.options === "editTask") {
+                    editiPatch({
+                        description: formData.description,
+                        categories: formData.categories,
+                        title: formData.title,
+                        authorId: formData.authorId,
+                        /* date: formData.date?.replace(/(\d{2})(\d{2})(\d{4})/, '$1/$2/$3'), */
+                        statu: true
+                    }, props.id);
                 }
-            } catch (error) {
-                console.error('Erro ao criar/editar tarefa:', error);
+                props.statusModalVisivel();
+            } else {
+                /* alert('Preencha todos os campos antes de enviar.'); */
+                handleError()
             }
-        } else {
-            /* alert("Data Inválida!!"); */
+        } catch (error) {
+            console.error('Erro ao criar/editar tarefa:', error);
             handleError()
         }
+        /* } else {
+            alert("Data Inválida!!"); 
+            
+        } */
     };
 
 
@@ -134,21 +140,27 @@ const FormsNewToDo: React.FC<IDataDefaultTask & res> = (props) => {
                         </select>
                     </div>
                     <div>
+                        <br />
                         <label>
-                            Escolha uma data:  
+                            Title
                         </label>
-                       
-                        
-                    </div> 
+                    </div>
                     <div>
-                            <input
+                        <input
+                            type="text"
+                            maxLength={15}
+                            name='title' // Adicionando o atributo 'name'    
+                            value={formData.title}
+                            onChange={handleChange}
+                        />
+                        {/* <input
                                 type="text"
                                 maxLength={8}
                                 name='date' // Adicionando o atributo 'name'    
                                 value={formData.date}
                                 onChange={handleChange}
-                            />
-                        </div>
+                            /> */}
+                    </div>
                     {
                         props.options == "editTask" ? (<button type="submit" >edit</button>) : <button type="submit">create</button>
                     }

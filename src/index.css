@@ -2,10 +2,10 @@
     padding: 0%;
     margin: 0%;
     box-sizing: border-box;
-    
+    font-family: "Mukta",  "Helvetica Neue", Helvetica, sans-serif;
 }
 :root{
     /* background-image: url(../public/teste3.png);
     background-size: cover; */
-    
+    background-color: #ffffff;
 }

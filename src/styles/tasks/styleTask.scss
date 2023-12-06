@@ -1,22 +1,25 @@
 .divMain {
-    background-color: #987e6d;
+    /* background-color: #987e6d; */
+    background-color: #ffffff;
     padding: 0%;
     margin: 0vh;
-    max-width: 90%;
-    min-width: 90%;
-    max-height: 10%;
-    min-height: 10%;
+   
     display: flex;
-    border-left: #682425 solid 10px;
+    border-left: #333 solid 10px;
+    /* border: #333 solid 4px; */
+    border-bottom: #333 solid 2px;
+    border-top: #333 solid 2px;
+    border-right: #333 solid 2px;
+    border-radius: 10px;
     align-items: center;
     margin: 1vh;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
+    /* border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px; */
  
 }
 
 .divMainComplet1{
-    background-color: #987e6d;
+    /* background-color: #987e6d; */
     padding: 0%;
     margin: 0vh;
     max-width: 90%;
@@ -34,12 +37,13 @@
 }
 
 .check{
-    background-color:#987e6d;
+   
+    color:#333;
     border: 0cap;
     :hover{
-    background-color: rgb(0, 136, 45);
-    border-radius: 20px;
-    transition-duration: 700ms;
+    color: rgb(0, 136, 45);
+    
+    transition-duration: 500ms;
 }
 }
 
@@ -73,7 +77,8 @@ margin: 1vh;
 padding: 1vh;
 button {
        margin: 5px;
-       background-color:#987e6d;
+       background-color:#333;
+       color: #ffffff;
         border: 0cap;
         padding: 5px;
         border-radius: 5px;
@@ -84,16 +89,16 @@ button {
 .edit{
 
     :hover{
-        background-color: rgb(216, 212, 0);
-        border-radius: 5px;
-        transition-duration: 700ms;
+        color: rgb(216, 212, 0);
+        
+        transition-duration: 500ms;
     }
 }
 .delete{
     :hover{
-        background-color: rgb(216, 0, 0);
-        border-radius: 5px;
-        transition-duration: 700ms;
+        color: rgb(216, 0, 0);
+   
+        transition-duration: 500ms;
     }
 }
 
@@ -111,20 +116,25 @@ button {
 .bbIncontask{
     font-size: 15px;
 }
-
+.textDescriptTitle{
+    color: #3b3b3b;
+}
 
 
 @media (max-width: 600px) {
     .divMain {
-        background-color: #987e6d;
+        /* background-color: #987e6d; */
         padding: 0%;
         margin: 0vh;
-        max-width: 100%;
-        min-width:100%;
-        max-height: 10%;
-        min-height: 10%;
+      
         display: flex;
-        border-left: #682425 solid 10px;
+       
+        border-left: #333 solid 10px;
+        /* border: #333 solid 4px; */
+        border-bottom: #333 solid 2px;
+        border-top: #333 solid 2px;
+        border-right: #333 solid 2px;
+        border-radius: 10px;
         align-items: center;
         margin: 1vh;
         border-radius: 10px;
@@ -132,7 +142,7 @@ button {
     }
     
     .divMainComplet1{
-        background-color: #987e6d;
+        /* background-color: #987e6d; */
         font-size: 10px;
         padding: 0%;
         margin: 0vh;
@@ -150,12 +160,12 @@ button {
     }
     
     .check{
-        background-color:#987e6d;
+        color:#333;
         border: 0cap;
         :hover{
-        background-color: rgb(0, 136, 45);
-        border-radius: 20px;
-        transition-duration: 700ms;
+        color: rgb(0, 136, 45);
+        
+        transition-duration: 500ms;
         size: 30px;
     }
     }
@@ -192,7 +202,7 @@ button {
  
     button {
            margin: 3px;
-           background-color:#987e6d;
+           background-color:#333;
             border: 0cap;
             padding: 3px;
             border-radius: 5px;
@@ -203,16 +213,16 @@ button {
     .edit{
     
         :hover{
-            background-color: rgb(216, 212, 0);
-            border-radius: 5px;
-            transition-duration: 700ms;
+            color: rgb(216, 212, 0);
+            
+            transition-duration: 500ms;
         }
     }
     .delete{
         :hover{
-            background-color: rgb(216, 0, 0);
-            border-radius: 5px;
-            transition-duration: 700ms;
+            color: rgb(216, 0, 0);
+       
+            transition-duration: 500ms;
         }
     }
     

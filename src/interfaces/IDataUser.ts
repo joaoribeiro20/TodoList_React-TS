@@ -9,7 +9,7 @@ export interface IDataUser{
     tasks:tasks[]
 }
 export interface tasks{
-    _id: string;
+    id: string;
     title: string;
     description:string;
     categories:string;
