@@ -6,35 +6,48 @@ import FormsNewToDo from "./FormsNewToDo";
 import { useAppContext } from "../hooks/InfoUser";
 import { editTask } from "../interfaces/EditTask";
 
-interface FiltersProps{
-    setUpadatePage: React.Dispatch<React.SetStateAction<number>>;
-    onDelete: () => void, 
-    onedit: () => void, 
-    onstatus: () => void 
+interface FiltersProps {
+    /* setUpadatePage:  () => void,  */
+    onDelete: () => void,
+    onedit: () => void,
+    onstatus: () => void
+    tasks: IDataDefaultTask | null;
 }
 
-const Task: React.FC<IDataDefaultTask & FiltersProps> = (props,setUpadatePage,) => {
-    const { statu, id, title, description, categories, onDelete, onedit, onstatus } = props;
-    const [classDinamic, setClassDinamic] = useState(statu ? "divMainComplet1" : "divMain");
-    const { data, setData } = useAppContext();
+const Task: React.FC<FiltersProps> = ({ tasks, onDelete }) => {
+    /*  const { statu, id, title, description, categories, onDelete, onedit, onstatus } = props;*/
+     const [classDinamic, setClassDinamic] = useState(tasks?.statu ? "divMainComplet1" : "divMain"); 
+    const { data, setData, updateP, setUpdateP } = useAppContext();
     const [updatedTasks, setUpdatedTasks] = useState<IDataDefaultTask>();
+  
 
-    useEffect(() => {
-        // Update classDinamic whenever statu changes
-        setClassDinamic(statu ? "divMainComplet1" : "divMain");
-    }, [statu]);
+        useEffect(() => {
+            // Update classDinamic whenever statu changes
+            setClassDinamic(tasks?.statu ? "divMainComplet1" : "divMain");
+        }, [tasks?.statu]); 
+        
 
-    function handleStatusToggle() {
-        onstatus();
+    function handleStatusToggle(taskId: string) {
+       
+        /* const itemAlterado = updateP && updateP.find((task) => task.id === taskId)
+        console.log(itemAlterado?.statu = !itemAlterado?.statu) */
+        /* const updat = itemAlterado
+        const indecItem = updateP.indexOf(itemAlterado!)
+        updateP.splice(indecItem, 1)
+        const updateTask = [...updateP, updat];
+        setUpdateP(updateTask) */
+        
         // Note: No need to update classDinamic here, useEffect will handle it when statu changes
     }
 
     function handleEdit(taskId: string) {
-       
-        setUpdatedTasks(data.tasks && data.tasks.find((task) => task.id === taskId)) 
+        const itemAlterado = updateP && updateP.find((task) => task.id === taskId)
+        const indecItem = updateP.indexOf(itemAlterado!)
+        updateP.splice(indecItem, 1)
+        setUpdatedTasks(itemAlterado)  
         vizualizacao()
         console.log(taskId)
-        onedit();
+        /*  onedit(); */
     }
 
     function handleDelete() {
@@ -44,62 +57,63 @@ const Task: React.FC<IDataDefaultTask & FiltersProps> = (props,setUpadatePage,) 
     const [modalCreateToDo, setModalCreateToDo] = useState(false)
 
     function vizualizacao() {
-      setModalCreateToDo(!modalCreateToDo)
-      
+        setModalCreateToDo(!modalCreateToDo)
+
     }
 
-    function updatePage(){
-        setUpadatePage(Math.random() * 10) 
-      }
+   
+     
 
     return (
         <>
-         {
-        modalCreateToDo && (
-          <div>
-            <FormsNewToDo 
-            id={updatedTasks?.id!} 
-            options="editTask" 
-            statu={true} 
-            title={updatedTasks?.title!}
-            description={updatedTasks?.description!} 
-            categories={updatedTasks?.categories!} 
-            authorId={updatedTasks?.authorId!}
-            updatePage={updatePage}
-            statusModalVisivel={vizualizacao} />
-          </div>
-        )
-      }
-        <div className={classDinamic} key={id}>
-            <div className="description">
-                <div>
-                    <button className="check" onClick={handleStatusToggle}>
-                        {statu ? <BsPatchCheck  className="bbIncon"/> : <BsPatchCheckFill  className="bbIncon"/>}
-                    </button>
-                </div>
-                <div className="textDescription">
-                    <p><strong>{title}</strong></p>
-                    <br /><p className="textDescriptTitle">description</p>
-                    <p>{description}</p>
-                </div>
-                <div className="btns">
+            {
+                modalCreateToDo && (
                     <div>
-                        <button className="edit" onClick={() => handleEdit(id || '')}><BsFillPencilFill  className="bbIncontask"/></button>
+                        <FormsNewToDo
+                            id={updatedTasks?.id!}
+                            options="editTask"
+                            statu={true}
+                            title={updatedTasks?.title!}
+                            description={updatedTasks?.description!}
+                            categories={updatedTasks?.categories!}
+                            authorId={updatedTasks?.authorId!}
+                            /* updatePage={()=>{updatePage()}} */
+                            statusModalVisivel={vizualizacao} />
                     </div>
+                )
+            }
+            <div className={classDinamic}>
+                <div className="description">
                     <div>
-                        <button className="delete" onClick={handleDelete} ><BsFillTrash3Fill  className="bbIncontask"/></button>
+                        <button className="check" onClick={() => handleStatusToggle(tasks?.id || '')}>
+                            {tasks?.statu ? 
+                            <BsPatchCheck className="bbIncon" /> 
+                            : <BsPatchCheckFill className="bbIncon" />}
+                        </button>
+                    </div>
+                    <div className="textDescription">
+                        <p><strong>{tasks?.title} {tasks?.id}</strong></p>
+                        <br /><p className="textDescriptTitle">description</p>
+                        <p>{tasks?.description}</p>
+                    </div>
+                    <div className="btns">
+                        <div>
+                            <button className="edit" onClick={() => handleEdit(tasks?.id || '')}><BsFillPencilFill className="bbIncontask" /></button>
+                        </div>
+                        <div>
+                            <button className="delete" onClick={handleDelete} ><BsFillTrash3Fill className="bbIncontask" /></button>
+                        </div>
+                    </div>
+                </div>
+                <div className="divMainTask">
+                    <div className="areaCategoriasData">
+                        <p><span className="text">Categoria: </span>{tasks?.categories.toUpperCase()}</p>
+                        {/* <p><span className="text">Prazo de Conlusão: </span>{date}</p> */}
                     </div>
                 </div>
             </div>
-            <div className="divMainTask">
-                <div className="areaCategoriasData">
-                    <p><span className="text">Categoria: </span>{categories.toUpperCase()}</p>
-                    {/* <p><span className="text">Prazo de Conlusão: </span>{date}</p> */}
-                </div>
-            </div>
-        </div>
         </>
-        
+
     );
 };
 

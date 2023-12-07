@@ -6,61 +6,80 @@ import FormsNewToDo from "./FormsNewToDo";
 import "../styles/tasks/StyleFormsDinamic.scss"
 import "../styles/tasks/Filters.scss"
 import { BsSearch } from "react-icons/bs";
+import { useAppContext } from "../hooks/InfoUser";
+import { GetUserId } from "../services/users/GetUserId";
+import { GetAllTasksOneUser } from "../services/tasks/GetAllTaskOneUser";
 
 
 interface FiltersProps {
-  allTasks: IDataDefaultTask[] | null;
   idUserCreateTask:string
-   setFilteredTasks: React.Dispatch<React.SetStateAction<IDataDefaultTask[] | null>>;
-   setUpadatePage: React.Dispatch<React.SetStateAction<number>>;
+   /* setUpadatePage: () => void */
   /* statusModalVisivel: () => void */
 }
 
-const Filters: FC<FiltersProps> = ({ allTasks, setFilteredTasks, setUpadatePage, idUserCreateTask }) => {
-  /* const [filteredTasks, setFilteredTasks] = useState<IDataDefaultTask[] | null>(null); */
+const Filters: FC<FiltersProps> = ({  idUserCreateTask }) => {
+  /* const [filteredTasks, setUpdateP] = useState<IDataDefaultTask[] | null>(null); */
   const [inputValue, setInputValue] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
-
+  const { data, setData, updateP, setUpdateP } = useAppContext();
   const [selectedStatus, setSelectedStatus] = useState<string>('');
+  const [testeBackp, setTesteBackp]= useState<IDataDefaultTask[]>([])
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+
+
+  const handleInputChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setInputValue(value);
 
-    const filtered = allTasks && allTasks.filter((task) => task.description.includes(value));
-    setFilteredTasks(filtered);
+    const valorArmazenado = localStorage.getItem('dadosUser');
+    const userData = await GetAllTasksOneUser(valorArmazenado!);
+    setUpdateP(userData);
+    setTesteBackp(userData)
+
+    const filtered = testeBackp && testeBackp.filter((task) => task.description.includes(value) || task.title.includes(value));
+    setUpdateP(filtered!);
   };
 
-  const handleCategoryChange = (event: ChangeEvent<HTMLSelectElement>) => {
+  const handleCategoryChange = async (event: ChangeEvent<HTMLSelectElement>) => {
     const category = event.target.value;
     setSelectedCategory(category);
-
-    const filtered = allTasks && allTasks.filter((task) => {
+    
+    const valorArmazenado = localStorage.getItem('dadosUser');
+    const userData = await GetAllTasksOneUser(valorArmazenado!);
+    setUpdateP(userData);
+    setTesteBackp(userData)
+    const filtered =  testeBackp && testeBackp.filter((task) => {
       const descriptionMatch = task.description.includes(inputValue);
-      const categoryMatch = category === '' || task.categories === category;
+      const categoryMatch = category === '' || task.categories.includes(category);
       return descriptionMatch && categoryMatch;
     });
+  
+    setUpdateP(filtered || []);
 
-    setFilteredTasks(filtered);
+   
   };
 
-  const updatePage = ()=>{
-    setUpadatePage(Math.random() * 10)
-  }
+ /*  const updatePage = () => {
+    setUpadatePage() 
+  } */
 
-  const handleStatusChange = (event: ChangeEvent<HTMLSelectElement>) => {
+  const handleStatusChange = async (event: ChangeEvent<HTMLSelectElement>) => {
     const status = event.target.value;
     setSelectedStatus(status);
 
-    const filtered = allTasks && allTasks.filter((task) => {
-      const descriptionMatch = task.description.includes(inputValue);
-      const value = task.statu.toString();
-      const statusMatch = status === 'a' || value === status;
+    const valorArmazenado = localStorage.getItem('dadosUser');
+    const userData = await GetAllTasksOneUser(valorArmazenado!);
+    setUpdateP(userData);
+    setTesteBackp(userData)
+
+    const filtered = testeBackp && testeBackp.filter((task) => {
+      const descriptionMatch = task.description.includes(inputValue); // Check if task description includes the inputValue
+      const statusMatch = status === 'a' || (task.statu ? true : false); // Match based on the selected status
       console.log(statusMatch);
       return descriptionMatch && statusMatch;
     });
-
-    setFilteredTasks(filtered);
+    
+    setUpdateP(filtered || []); // Use the empty array if filtered is undefined
   };
 
   const [modalCreateToDo, setModalCreateToDo] = useState(false)
@@ -84,18 +103,24 @@ const Filters: FC<FiltersProps> = ({ allTasks, setFilteredTasks, setUpadatePage,
             categories={''} 
             authorId={idUserCreateTask}
             statusModalVisivel={vizualizacao}
-            updatePage={updatePage} />
+            /* updatePage={()=>{updatePage()}} */ />
           </div>
         )
       }
       <div className="areaPesquisaBtn">
         <div className="inputPesquisaG">
           <BsSearch className="bbIncon" />
-          <input className="inputPesquisa" type="text" value={inputValue} onChange={handleInputChange} placeholder="Pesquise suas tarefas aqui" />
+          <input 
+          className="inputPesquisa" 
+          type="text" 
+          value={inputValue} 
+          onChange={handleInputChange} 
+          placeholder="Pesquise suas tarefas aqui" />
         </div>
 
         <div>
-          <button className="btnNewTask" onClick={vizualizacao} ><IoAddCircle className="bbIncon"/>New Task</button>
+          <button className="btnNewTask" 
+          onClick={vizualizacao} ><IoAddCircle className="bbIncon"/>New Task</button>
         </div>
 
       </div>

@@ -32,7 +32,8 @@ const Login: FC = () => {
         password: formData.password,
         telefone: '', // Mantido como string
         apelido: '',
-        cep: '', // Mantido como string
+        cep: '',
+        tasks:[] // Mantido como string
       };
       console.log(`dados que estao sendo enviado na request ${initialFormData}`)
       const user = await getUser(initialFormData);
@@ -40,7 +41,7 @@ const Login: FC = () => {
       user.id && localStorage.setItem("dadosUser", user.id);
       navigate('/task');
     } catch (error) {
-      alert('Erro ao processar o formulário:');
+      console.log('Erro ao processar o formulário:');
       // Adicione lógica aqui para lidar com erros de requisição.
     }
   };
@@ -53,7 +54,16 @@ const Login: FC = () => {
           <div>
             <h1>Seja bem-vindo <br />Faça login para entrar</h1>
             <DynamicForm fields={fields} onSubmit={handleFormSubmit} />
-            <Link to="/cadastro">Cadastre-se</Link>
+            <div className="areaComplementar">
+              <div className="areaComplementar2">
+                <div><input type="checkbox"/></div><div><p>Lembre De mim</p></div>
+                
+              </div>
+              <div>
+                <Link to='/'>Esquenceu a senha?</Link>
+              </div>
+              </div>
+            <p className="cadastrese">Não tem conta? <Link to="/cadastro">Cadastre-se</Link></p>
           </div>
         </article>
       </section>

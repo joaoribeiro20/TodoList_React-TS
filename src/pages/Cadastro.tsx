@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/Cadastro.scss"
 
 /* import {useAppContext} from "../hooks/teste" */
@@ -22,7 +22,7 @@ const fields = [
     
 const Cadastro: FC = () => {
     /* const {count, setCount} = useAppContext() */
-
+    const navigate = useNavigate();
     const handleFormSubmit = async (formData:IDataUser) => {
         try {
         console.log('Form submitted with data:', formData);
@@ -35,8 +35,10 @@ const Cadastro: FC = () => {
             password: '',
             telefone: '', // Mantido como string
             apelido: '',
-            cep: '', // Mantido como string
+            cep: '',
+            tasks:[] // Mantido como string
           };
+          navigate('/');
           formData=initialFormData
       } catch (Error) {
         alert('Erro ao processar o formulário:');

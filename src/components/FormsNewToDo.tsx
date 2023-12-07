@@ -1,22 +1,24 @@
 // FormsNewToDo.tsx
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { PostCreateTask } from '../services/tasks/PostCreateTask';
 
 import { IDataDefaultTask } from '../interfaces/IDataDefaultTask';
 import { editiPatch } from '../services/tasks/PatchTask';
 import ErrorCard from './ErrorCard';
+import { useAppContext } from '../hooks/InfoUser';
+import { GetUserId } from '../services/users/GetUserId';
 
 interface res {
     options: string
     id: string
     statusModalVisivel: () => void;
-    updatePage: ()=> void
+
 }
 
 const FormsNewToDo: React.FC<IDataDefaultTask & res> = (props) => {
-
+    const { data, setData, updateP, setUpdateP } = useAppContext();
     const [formData, setFormData] = useState<IDataDefaultTask>({
-        id:props.id,
+        id: props.id,
         description: props.description,
         categories: props.categories,
         title: props.title,
@@ -24,7 +26,24 @@ const FormsNewToDo: React.FC<IDataDefaultTask & res> = (props) => {
         statu: props.statu
     });
 
-
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+             
+                const valorArmazenado = localStorage.getItem('dadosUser');
+                console.log(`valor recuperado ${valorArmazenado}`)
+                if (valorArmazenado) {
+                  console.log("useEffect3")
+                  /*  allTasks && setAllTasks(awaitGetUserId(valorArmazenado)) */
+                  const userData = await GetUserId(valorArmazenado);
+                }
+            } catch (error) {
+              console.error('Erro ao buscar dados do usuário:', error);
+            }
+          };
+       
+          fetchData();
+    },[])
 
     const [errorVisible, setErrorVisible] = useState(false);
 
@@ -62,7 +81,7 @@ const FormsNewToDo: React.FC<IDataDefaultTask & res> = (props) => {
             }));
         }
     };
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         /* 
                 const day = parseInt(formData.date?.replace(/\D/g, '').substring(0, 2) || '', 10);
@@ -73,28 +92,32 @@ const FormsNewToDo: React.FC<IDataDefaultTask & res> = (props) => {
         try {
             if (formData.categories && formData.description) {
                 if (props.options === "createNew") {
-                    PostCreateTask({
+                   /*  formData.id = `${Math.floor(Math.random() * 1000)}` */
+                    const teste = await PostCreateTask({
                         title: formData.title,
                         description: formData.description,
                         categories: formData.categories,
-                        statu:formData.statu,
+                        statu: formData.statu,
                         authorId: formData.authorId,
-                    });
-                    props.updatePage
+                    })
+                     
+                const updateTask = [...updateP, teste];
+                 setUpdateP(updateTask);
+                    
                 } else if (props.options === "editTask") {
                     editiPatch({
-                        id:formData.id,
+                        id: formData.id,
                         description: formData.description,
                         categories: formData.categories,
                         title: formData.title,
                         authorId: formData.authorId,
-                        statu: false
-                    }); 
-                
+                        statu: true
+                    })
+                    const updateTask = [...updateP, formData];
+                    setUpdateP(updateTask);
                 }
-                
                 props.statusModalVisivel();
-               
+
             } else {
                 /* alert('Preencha todos os campos antes de enviar.'); */
                 handleError()
@@ -109,6 +132,7 @@ const FormsNewToDo: React.FC<IDataDefaultTask & res> = (props) => {
         } */
     };
 
+    
 
     return (
         <div className='divMainForms'>

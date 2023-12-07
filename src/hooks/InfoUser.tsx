@@ -2,12 +2,15 @@ import { createContext, useContext, ReactNode, useState } from 'react';
 
 
 import { IDataUser } from "../interfaces/IDataUser";
+import { IDataDefaultTask } from '../interfaces/IDataDefaultTask';
 /* ---- Criando o context, porem no typescript é necessario informa o tipo do context ---------- */
 /* criando o tipo para o context*/
 
 type MyContextType = {
   data: IDataUser;
   setData: React.Dispatch<React.SetStateAction<IDataUser>>;
+  updateP: IDataDefaultTask[];
+  setUpdateP: React.Dispatch<React.SetStateAction<IDataDefaultTask[]>>;
 };
 /* criando o context e dando o tipo criado a cima a ele*/
 const MyContext = createContext<MyContextType | undefined>(undefined);
@@ -28,10 +31,12 @@ const MyContextProvider: React.FC<MyContextProviderProps> = ({ children }) => {
     password:"",
     telefone:'0',
     apelido:"",
-    cep:0,
+    cep:'0',
+    tasks:[]
   });
+  const [updateP, setUpdateP] = useState([]);
   return(
-    <MyContext.Provider value={{ data, setData}}>
+    <MyContext.Provider value={{updateP, setUpdateP, data, setData}}>
       {children}
     </MyContext.Provider>
   ) 

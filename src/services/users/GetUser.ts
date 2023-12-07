@@ -8,7 +8,7 @@ export const getUser = async (date:IDataUser): Promise<IDataUser> => {
         password:date.password
       }
       const response = await axios.post<IDataUser>('http://localhost:8088/login',dados);
-      alert('usuario alterticado')
+      console.log('usuario altenticado')
       return response.data
     } catch (error) {
       alert('usuario nao encontrado')
