@@ -26,24 +26,7 @@ const FormsNewToDo: React.FC<IDataDefaultTask & res> = (props) => {
         statu: props.statu
     });
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-             
-                const valorArmazenado = localStorage.getItem('dadosUser');
-                console.log(`valor recuperado ${valorArmazenado}`)
-                if (valorArmazenado) {
-                  console.log("useEffect3")
-                  /*  allTasks && setAllTasks(awaitGetUserId(valorArmazenado)) */
-                  const userData = await GetUserId(valorArmazenado);
-                }
-            } catch (error) {
-              console.error('Erro ao buscar dados do usuário:', error);
-            }
-          };
-       
-          fetchData();
-    },[])
+   
 
     const [errorVisible, setErrorVisible] = useState(false);
 
@@ -97,12 +80,12 @@ const FormsNewToDo: React.FC<IDataDefaultTask & res> = (props) => {
                         title: formData.title,
                         description: formData.description,
                         categories: formData.categories,
-                        statu: formData.statu,
+                        statu: false,
                         authorId: formData.authorId,
                     })
                      
-                const updateTask = [...updateP, teste];
-                 setUpdateP(updateTask);
+                const updateTaska = [...updateP, teste];
+                 setUpdateP(updateTaska);
                     
                 } else if (props.options === "editTask") {
                     editiPatch({
@@ -111,7 +94,7 @@ const FormsNewToDo: React.FC<IDataDefaultTask & res> = (props) => {
                         categories: formData.categories,
                         title: formData.title,
                         authorId: formData.authorId,
-                        statu: true
+                        statu: false
                     })
                     const updateTask = [...updateP, formData];
                     setUpdateP(updateTask);
@@ -140,34 +123,8 @@ const FormsNewToDo: React.FC<IDataDefaultTask & res> = (props) => {
 
                 <form onSubmit={handleSubmit}>
                     {
-                        props.options == "editTask" ? (<h3>Edite sua task</h3>) : <h3 >Crie sua nova task</h3>
-                    }
-                    <label htmlFor="largeTextInput">descriptio task</label>
-                    <div>
-                        <textarea
-                            rows={6}
-                            cols={30}
-                            id="largeTextInput"
-                            name='description' // Adicionando o atributo 'name'
-                            value={formData.description}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <label htmlFor="selectOption">Selecione uma opção:</label>
-                    <div>
-
-                        <select
-                            id="selectOption"
-                            name='categories' // Adicionando o atributo 'name'
-                            value={formData.categories}
-                            onChange={handleChange}
-                        >
-                            <option value="">Categorias</option>
-                            <option value="work">Work</option>
-                            <option value="person">Person</option>
-                            <option value="study">Study</option>
-                        </select>
-                    </div>
+                        props.options == "editTask" ? (<h3>Edit your Task</h3>) : <h3 >Create new task</h3>
+                    } 
                     <div>
                         <br />
                         <label>
@@ -189,12 +146,40 @@ const FormsNewToDo: React.FC<IDataDefaultTask & res> = (props) => {
                                 value={formData.date}
                                 onChange={handleChange}
                             /> */}
+                    </div><br />
+                    <label htmlFor="largeTextInput">Description task</label>
+                    <div>
+                        <textarea
+                            rows={6}
+                            cols={30}
+                            id="largeTextInput"
+                            name='description' // Adicionando o atributo 'name'
+                            value={formData.description}
+                            onChange={handleChange}
+                        />
+                    </div><br />
+                    <label htmlFor="selectOption">Select option:</label>
+                    <div>
+
+                        <select
+                            id="selectOption"
+                            name='categories' // Adicionando o atributo 'name'
+                            value={formData.categories}
+                            onChange={handleChange}
+                        >
+                            <option value="">category</option>
+                            <option value="work">Work</option>
+                            <option value="person">Person</option>
+                            <option value="study">Study</option>
+                        </select>
                     </div>
+                    
+                   
                     {
-                        props.options == "editTask" ? (<button type="submit" >edit</button>) : <button type="submit">create</button>
+                        props.options == "editTask" ? (<button type="submit" >Edit</button>) : <button type="submit">Create</button>
                     }
 
-                    <button onClick={props.statusModalVisivel}>sair</button>
+                    <button onClick={props.statusModalVisivel}>Exit</button>
                 </form>
             </div>
             {errorVisible && <ErrorCard errorMessage="Ocorreu um erro. Tente novamente." onClose={handleCloseError} />}

@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import FormsNewToDo from "./FormsNewToDo";
 import { useAppContext } from "../hooks/InfoUser";
 import { editTask } from "../interfaces/EditTask";
+import { GetAllTasksOneUser } from "../services/tasks/GetAllTaskOneUser";
+import { editiPatch } from "../services/tasks/PatchTask";
 
 interface FiltersProps {
     /* setUpadatePage:  () => void,  */
@@ -19,26 +21,51 @@ const Task: React.FC<FiltersProps> = ({ tasks, onDelete }) => {
      const [classDinamic, setClassDinamic] = useState(tasks?.statu ? "divMainComplet1" : "divMain"); 
     const { data, setData, updateP, setUpdateP } = useAppContext();
     const [updatedTasks, setUpdatedTasks] = useState<IDataDefaultTask>();
+    
   
-
+/* 
         useEffect(() => {
             // Update classDinamic whenever statu changes
             setClassDinamic(tasks?.statu ? "divMainComplet1" : "divMain");
-        }, [tasks?.statu]); 
+            console.log("useEffect3")
+            console.log(tasks?.statu)
+        }, [tasks?.statu]);   */
         
-
-    function handleStatusToggle(taskId: string) {
-       
-        /* const itemAlterado = updateP && updateP.find((task) => task.id === taskId)
-        console.log(itemAlterado?.statu = !itemAlterado?.statu) */
-        /* const updat = itemAlterado
-        const indecItem = updateP.indexOf(itemAlterado!)
-        updateP.splice(indecItem, 1)
-        const updateTask = [...updateP, updat];
-        setUpdateP(updateTask) */
-        
-        // Note: No need to update classDinamic here, useEffect will handle it when statu changes
-    }
+        async function handleStatusToggle(taskId: string) {
+            console.log('teste');
+          
+            // Commented out code for reference
+            /*
+            const valorArmazenado = localStorage.getItem('dadosUser');
+            const userData = await GetAllTasksOneUser(valorArmazenado!);
+            setUpdateP(userData);
+            setTesteBackp(userData);
+            */
+          
+            // Find the task with the specified taskId in the updateP array
+            const itemAlterado = updateP && updateP.find((task) => task.id === taskId);
+          
+            // Check the statu property of the found task (if it exists) and assign it to teste2
+            const teste2 = itemAlterado?.statu || '';
+            console.log(teste2);
+          
+            // Make a PATCH request to update the task status using the editiPatch function
+            const teste = await editiPatch({
+              id: itemAlterado?.id,
+              description: itemAlterado?.description,
+              categories: itemAlterado?.categories,
+              title: itemAlterado?.title,
+              authorId: itemAlterado?.authorId,
+              statu: !itemAlterado?.statu, // Corrected from !itemAlterado?.id
+            });
+          
+            // Set a dynamic class based on the task status
+            setClassDinamic(!teste2 ? 'divMainComplet1' : 'divMain');
+          
+            // Update the updateP state by removing the current task and adding the updated task
+            const updatedTasks = updateP.filter((task) => task.id !== taskId);
+            setUpdateP([...updatedTasks, teste]);
+          }
 
     function handleEdit(taskId: string) {
         const itemAlterado = updateP && updateP.find((task) => task.id === taskId)
@@ -87,8 +114,10 @@ const Task: React.FC<FiltersProps> = ({ tasks, onDelete }) => {
                     <div>
                         <button className="check" onClick={() => handleStatusToggle(tasks?.id || '')}>
                             {tasks?.statu ? 
-                            <BsPatchCheck className="bbIncon" /> 
-                            : <BsPatchCheckFill className="bbIncon" />}
+                            /* icone claro */
+                            <BsPatchCheckFill className="bbIncon" />
+                            /* icone escuro */
+                            : <BsPatchCheck className="bbIncon" /> }
                         </button>
                     </div>
                     <div className="textDescription">

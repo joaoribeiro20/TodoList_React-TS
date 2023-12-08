@@ -8,17 +8,13 @@ import { IDataUser } from "../interfaces/IDataUser";
 
 
 const fields = [
-  { name: 'email', label: 'Email', type: 'email' },
-  { name: 'password', label: 'Password', type: 'password' },
+  { name: 'email', label: 'Email', type: 'email', exemplo:"MeuEmail@gmail.com" },
+  { name: 'password', label: 'Password', type: 'password',  exemplo:"Ta8933" },
 ];
 
-interface teste{
-    email:string
-    password:string
-}
 
 const Login: FC = () => {
-  const { data, setData } = useAppContext();
+  const { setData } = useAppContext();
   const navigate = useNavigate();
 
   const handleFormSubmit = async (formData: IDataUser) => {
@@ -56,14 +52,14 @@ const Login: FC = () => {
             <DynamicForm fields={fields} onSubmit={handleFormSubmit} />
             <div className="areaComplementar">
               <div className="areaComplementar2">
-                <div><input type="checkbox"/></div><div><p>Lembre De mim</p></div>
+                <div><input type="checkbox"/> </div> <div><p>Lembrar de mim</p></div>
                 
               </div>
               <div>
-                <Link to='/'>Esquenceu a senha?</Link>
+                <Link to='/'>Esqueceu sua senha?</Link>
               </div>
               </div>
-            <p className="cadastrese">Não tem conta? <Link to="/cadastro">Cadastre-se</Link></p>
+            <p className="cadastrese">Não tem uma conta? <Link to="/cadastro">Cadastre-se</Link></p>
           </div>
         </article>
       </section>

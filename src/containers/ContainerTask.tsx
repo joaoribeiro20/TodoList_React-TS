@@ -1,13 +1,10 @@
 import { FC, useEffect, useState } from "react";
 import { useAppContext } from "../hooks/InfoUser";
 import { GetUserId } from "../services/users/GetUserId";
-import { IDataDefaultTask } from "../interfaces/IDataDefaultTask";
 import Task from "../components/Task";
 import Filters from "../components/Filters";
 import { Delete } from "../interfaces/DeleteTask";
-import { editTask } from "../interfaces/EditTask";
-import { IDataUser } from "../interfaces/IDataUser";
-import { set } from "date-fns";
+import "../styles/MainToDo.scss"
 
 const ContainerTask: FC = () => {
   const { data, setData, updateP, setUpdateP } = useAppContext();
@@ -52,11 +49,14 @@ const ContainerTask: FC = () => {
 
   return (
     <>
-      <Filters
+    <div className="divFiltro">
+<Filters
         idUserCreateTask={data.id ? data.id : ""} 
        
       />
-      {updateP ?
+    </div>
+    <div className="divTaskContainer">
+  {updateP ?
         updateP.map(task =>
           <Task
             onstatus={() => onstatus(task.id || '')}
@@ -66,6 +66,9 @@ const ContainerTask: FC = () => {
             onDelete={() => handleDelete(task.id || '')}
           />)
         : 'Carregando...'}
+    </div>
+      
+    
     </>
   );
 };

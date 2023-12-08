@@ -120,7 +120,7 @@ const Filters: FC<FiltersProps> = ({  idUserCreateTask }) => {
 
         <div>
           <button className="btnNewTask" 
-          onClick={vizualizacao} ><IoAddCircle className="bbIncon"/>New Task</button>
+          onClick={vizualizacao} ><IoAddCircle className="btt"/>New Task</button>
         </div>
 
       </div>

@@ -1,7 +1,7 @@
 .sectionMain{
     display: flex;
     flex-direction: row;
-  
+    text-decoration: none;
 }
 .areaImgMain{
 background-color: black;
@@ -15,6 +15,7 @@ width: 100%;
     height: 100vh;
     width: 100%;
     margin-top: 20vh;
+    
 }
 .areaComplementar{
     display: flex;
@@ -23,7 +24,7 @@ width: 100%;
     justify-content: space-between;
     .areaComplementar2{
         display: flex;
-       
+      
     }
 
 }

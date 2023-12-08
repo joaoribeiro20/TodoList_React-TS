@@ -6,6 +6,7 @@ interface Field {
   name: string;
   label: string;
   type: string;
+  exemplo: string;
 }
 
 interface DynamicFormProps {
@@ -52,6 +53,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ fields, onSubmit }) => {
             id={field.name}
             name={field.name}
             value={formData[field.name] || ''}
+            placeholder={field.exemplo}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               handleChange(field.name, e.target.value)
             }
