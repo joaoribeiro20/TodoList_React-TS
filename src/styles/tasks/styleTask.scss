@@ -163,18 +163,21 @@ button {
     
     .divMainComplet1{
         /* background-color: #987e6d; */
-        font-size: 10px;
-        padding: 0%;
-        margin: 0vh;
-        max-width: 100%;
-        min-width: 95%;
-        max-height: 10%;
-        min-height: 10%;
-        display: flex;
-        border-left: #682425 solid 10px;
-        align-items: center;
-        margin: 1vh;
-        border-radius: 10px;
+         /* background-color: #987e6d; */
+         padding: 0%;
+         margin: 0vh;
+       
+         display: flex;
+        
+         border-left: #333 solid 10px;
+         /* border: #333 solid 4px; */
+         border-bottom: #333 solid 2px;
+         border-top: #333 solid 2px;
+         border-right: #333 solid 2px;
+         border-radius: 10px;
+         align-items: center;
+         margin: 1vh;
+         border-radius: 10px;
         opacity: 0.5;
         text-decoration: line-through;
     }
