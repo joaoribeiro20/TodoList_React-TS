@@ -109,8 +109,8 @@ const Task: React.FC<FiltersProps> = ({ tasks, onDelete }) => {
                             /* updatePage={()=>{updatePage()}} */
                             statusModalVisivel={vizualizacao} />
                     </div>
-                ) : <h1>teste</h1>
-                : <h1>das droga</h1>
+                ) : <span></span>
+                : <span></span>
             }
             <div className={classDinamic}>
                 <div className="description">
