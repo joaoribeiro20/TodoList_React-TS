@@ -2,9 +2,10 @@
     display: flex;
     flex-direction: row;
     text-decoration: none;
+    
 }
 .areaImgMain{
-background-color: black;
+background-color: rgba(0, 21, 57, 0.7);
 width: 100%;
 }
 .areaFormsMain{
@@ -15,7 +16,7 @@ width: 100%;
     height: 100vh;
     width: 100%;
     margin-top: 20vh;
-    
+    margin: 2vh;
 }
 .areaComplementar{
     display: flex;
@@ -32,4 +33,42 @@ width: 100%;
 .cadastrese{
     margin-top: 8vh;
     font-size: 15px;
+}
+
+@media (max-width: 600px) {
+    .sectionMain{
+        display: flex;
+        flex-direction: row;
+        text-decoration: none;
+    }
+    .areaImgMain{
+    background-color: #333;
+    width: 100%;
+    }
+    .areaFormsMain{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width:150vh;
+        height: 100vh;
+        width: 79%;
+        margin-top: 20vh;
+        
+    }
+    .areaComplementar{
+        display: flex;
+        font-size: 12px;
+        margin-top: 2vh;
+       
+        .areaComplementar2{
+            display: flex;
+          
+        }
+    
+    }
+    
+    .cadastrese{
+        margin-top: 8vh;
+        font-size: 15px;
+    }
 }
