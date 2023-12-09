@@ -48,7 +48,7 @@ const Login: FC = () => {
         <article className="areaImgMain"></article>
         <article className="areaFormsMain">
           <div>
-            <h1>Seja bem-vindo <br />Faça login para entrar</h1>
+            <h1><br />Login</h1>
             <DynamicForm fields={fields} onSubmit={handleFormSubmit} />
             <div className="areaComplementar">
               <div className="areaComplementar2">

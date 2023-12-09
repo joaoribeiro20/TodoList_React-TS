@@ -124,9 +124,10 @@ const Task: React.FC<FiltersProps> = ({ tasks, onDelete }) => {
                         </button>
                     </div>
                     <div className="textDescription">
-                        <p><strong>{tasks?.title} {tasks?.id}</strong></p>
-                        <br /><p className="textDescriptTitle">description</p>
-                        <p>{tasks?.description}</p>
+                        <p><strong>{tasks?.title}</strong></p>
+                       
+                        <div className="ptext"><p>{tasks?.description}</p></div>
+                        
                     </div>
                     <div className="btns">
                         <div>

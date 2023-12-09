@@ -50,7 +50,7 @@ const Cadastro: FC = () => {
             <section className="sectionMain">
                 <article className="areaFormsMain">
                     <div>
-                         <h1>Seja bem vindo <br />Crie uma conta para logar</h1>
+                         <h1>Welcome <br />create your account</h1>
                     <DynamicForm fields={fields} onSubmit={handleFormSubmit} />
                     <br />
                     <input type="checkbox" /><label className='labelPattern' >aceito os termos</label>

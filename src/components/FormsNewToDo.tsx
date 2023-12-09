@@ -126,6 +126,7 @@ const FormsNewToDo: React.FC<IDataDefaultTask & res> = (props) => {
                         props.options == "editTask" ? (<h3>Edit your Task</h3>) : <h3 >Create new task</h3>
                     } 
                     <div>
+                        <hr />
                         <br />
                         <label>
                             Title
@@ -150,9 +151,9 @@ const FormsNewToDo: React.FC<IDataDefaultTask & res> = (props) => {
                     <label htmlFor="largeTextInput">Description task</label>
                     <div>
                         <textarea
-                            rows={6}
+                            rows={1}
                             cols={30}
-                            id="largeTextInput"
+                            maxLength={60}                            id="largeTextInput"
                             name='description' // Adicionando o atributo 'name'
                             value={formData.description}
                             onChange={handleChange}
