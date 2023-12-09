@@ -4,7 +4,7 @@ import { IDataDefaultTask } from "../../interfaces/IDataDefaultTask";
 
 export const getAllTasks = async (): Promise<IDataDefaultTask[]> => {
     try {
-      const response = await axios.get<IDataDefaultTask[]>('https://apitask-ydt8.onrender.com/tasks');
+      const response = await axios.get<IDataDefaultTask[]>('https://apiservicetask.onrender.com/');
       return response.data;
     } catch (error) {
       console.error('Erro ao buscar dados:', error);

@@ -7,7 +7,7 @@ export const getUser = async (date:IDataUser): Promise<IDataUser> => {
         email:date.email,
         password:date.password
       }
-      const response = await axios.post<IDataUser>('http://localhost:8088/login',dados);
+      const response = await axios.post<IDataUser>('https://apiservicetask.onrender.com/getOneUser',dados);
       console.log('usuario altenticado')
       return response.data
     } catch (error) {

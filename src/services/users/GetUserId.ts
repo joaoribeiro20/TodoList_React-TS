@@ -3,7 +3,7 @@ import { IDataUser } from "../../interfaces/IDataUser";
 
 export const GetUserId = async (id:string): Promise<IDataUser | null> => {
     try {
-      const response = await axios.get<IDataUser>(`http://localhost:8088/getUser/${id}`);
+      const response = await axios.get<IDataUser>(`https://apiservicetask.onrender.com/getTasks/${id}`);
     
       return response.data;
     } catch (error) {

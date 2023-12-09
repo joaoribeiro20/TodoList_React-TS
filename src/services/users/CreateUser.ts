@@ -11,7 +11,7 @@ export const CreateUser = async (Iforms:IDataUser): Promise<IDataUser> => {
         apelido:Iforms.apelido,
         cep:parseInt(Iforms.cep)
     }
-      const response = await axios.post<IDataUser>('http://localhost:8088/createUser',updateInfoUser);
+      const response = await axios.post<IDataUser>('https://apiservicetask.onrender.com/criarNovoUsuario',updateInfoUser);
       alert("usuario criado com sucesso")
       return response.data;
     } catch (error) {
