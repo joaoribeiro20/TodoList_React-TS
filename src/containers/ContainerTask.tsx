@@ -21,8 +21,8 @@ const ContainerTask: FC = () => {
             setUpdateP([])
             const userData = await GetUserId(valorArmazenado);
             if(userData != null) {
-               setData(userData!);
-            setUpdateP(userData.tasks!)
+            setData(userData);
+            setUpdateP(userData.tasks)
             console.log(userData)
             }else{
               console.log('null')

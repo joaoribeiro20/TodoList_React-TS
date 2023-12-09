@@ -33,10 +33,13 @@ const Filters: FC<FiltersProps> = ({  idUserCreateTask }) => {
 
     const valorArmazenado = localStorage.getItem('dadosUser');
     const userData = await GetAllTasksOneUser(valorArmazenado!);
+    console.log(userData)
     setUpdateP(userData);
     setTesteBackp(userData)
 
-    const filtered = testeBackp && testeBackp.filter((task) => task.description.includes(value) || task.title.includes(value));
+    const filtered = testeBackp && testeBackp.filter((task) => {
+      task.title.includes(value) || task.description.includes(value)
+    } );
     setUpdateP(filtered!);
   };
 
