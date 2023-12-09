@@ -8,8 +8,8 @@ import { IDataUser } from "../interfaces/IDataUser";
 
 
 const fields = [
-  { name: 'email', label: 'Email', type: 'email', exemplo:"MeuEmail@gmail.com" },
-  { name: 'password', label: 'Password', type: 'password',  exemplo:"Ta8933" },
+  { name: 'email', label: 'Email', type: 'email', exemplo:"MeuEmail@gmail.com",length:30  },
+  { name: 'password', label: 'Password', type: 'password',  exemplo:"Ta8933",length:20  },
 ];
 
 

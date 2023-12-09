@@ -1,6 +1,6 @@
 import axios from "axios";
 import { IDataDefaultTask } from "../../interfaces/IDataDefaultTask";
-import Task from "../../components/Task";
+
 
 
 export const GetAllTasksOneUser = async (id:string): Promise<IDataDefaultTask[]> => {

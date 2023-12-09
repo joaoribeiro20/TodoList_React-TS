@@ -10,12 +10,12 @@ import { IDataUser } from "../interfaces/IDataUser";
 
 
 const fields = [
-    { name: 'name', label: 'Name', type: 'text', exemplo:"João Vitor"  },
-    { name: 'email', label: 'Email', type: 'email', exemplo:"MeuEmail@gmail.com"  },
-    { name: 'password', label: 'Password', type: 'password', exemplo:"Tx833"  },
-    { name: 'telefone', label: 'Telefone', type: 'text', exemplo:"119300211091"  },
-    { name: 'apelido', label: 'Apelido', type: 'text', exemplo:"JoaoMilGrau"  },
-    { name: 'cep', label: 'CEP', type: 'text', exemplo:"05000590"  },
+    { name: 'name', label: 'Name', type: 'text', exemplo:"João Vitor",length:10 },
+    { name: 'email', label: 'Email', type: 'email', exemplo:"MeuEmail@gmail.com",length:30  },
+    { name: 'password', label: 'Password', type: 'password', exemplo:"Tx833",length:20  },
+    { name: 'telefone', label: 'Telefone', type: 'text', exemplo:"119300211091",length:12   },
+    { name: 'apelido', label: 'Apelido', type: 'text', exemplo:"JoaoMilGrau",length:20   },
+    { name: 'cep', label: 'CEP', type: 'text', exemplo:"05000590",length:7   },
     
 ];
 

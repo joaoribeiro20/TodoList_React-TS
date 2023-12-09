@@ -33,14 +33,12 @@ const Filters: FC<FiltersProps> = ({  idUserCreateTask }) => {
 
     const valorArmazenado = localStorage.getItem('dadosUser');
     const userData = await GetAllTasksOneUser(valorArmazenado!);
-    console.log(userData)
     setUpdateP(userData);
     setTesteBackp(userData)
-
-    const filtered = testeBackp && testeBackp.filter((task) => {
-      task.title.includes(value) || task.description.includes(value)
-    } );
-    setUpdateP(filtered!);
+    console.log(testeBackp)
+    const filtered = testeBackp && testeBackp.filter((task) => task.title.includes(value));
+    console.log(filtered)
+    setUpdateP(filtered || []);
   };
 
   const handleCategoryChange = async (event: ChangeEvent<HTMLSelectElement>) => {
@@ -51,6 +49,7 @@ const Filters: FC<FiltersProps> = ({  idUserCreateTask }) => {
     const userData = await GetAllTasksOneUser(valorArmazenado!);
     setUpdateP(userData);
     setTesteBackp(userData)
+    console.log(testeBackp)
     const filtered =  testeBackp && testeBackp.filter((task) => {
       const descriptionMatch = task.description.includes(inputValue);
       const categoryMatch = category === '' || task.categories.includes(category);
@@ -69,20 +68,18 @@ const Filters: FC<FiltersProps> = ({  idUserCreateTask }) => {
   const handleStatusChange = async (event: ChangeEvent<HTMLSelectElement>) => {
     const status = event.target.value;
     setSelectedStatus(status);
-
+  
     const valorArmazenado = localStorage.getItem('dadosUser');
     const userData = await GetAllTasksOneUser(valorArmazenado!);
     setUpdateP(userData);
-    setTesteBackp(userData)
-
+    setTesteBackp(userData);
+  
     const filtered = testeBackp && testeBackp.filter((task) => {
-      const descriptionMatch = task.description.includes(inputValue); // Check if task description includes the inputValue
-      const statusMatch = status === 'a' || (task.statu ? true : false); // Match based on the selected status
-      console.log(statusMatch);
-      return descriptionMatch && statusMatch;
+      const statusMatch = status === 'a' || task.statu === (status === 'true');
+      return statusMatch;
     });
-    
-    setUpdateP(filtered || []); // Use the empty array if filtered is undefined
+  
+    setUpdateP(filtered || []);
   };
 
   const [modalCreateToDo, setModalCreateToDo] = useState(false)
@@ -141,8 +138,8 @@ const Filters: FC<FiltersProps> = ({  idUserCreateTask }) => {
         <div>
           <select name="status" id="status" value={selectedStatus} onChange={handleStatusChange}>
             <option value="a">ALL</option>
-            <option value="true">Incomplete</option>
-            <option value="false">Complete</option>
+            <option value="false">Incomplete</option>
+            <option value="true">Complete</option>
           </select>
         </div>
       </div>

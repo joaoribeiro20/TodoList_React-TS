@@ -38,7 +38,8 @@ const ContainerTask: FC = () => {
       setUpdateP(data.tasks)
     }
     fetchData();
-  }, [data, setData]);
+  }, [data, setData, setUpdateP]);
+  
 
   const handleDelete = (taskId: string) => {
     updateP && setUpdateP(Delete(taskId, updateP))
