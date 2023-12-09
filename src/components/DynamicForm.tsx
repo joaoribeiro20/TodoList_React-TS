@@ -22,6 +22,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ fields, onSubmit }) => {
     telefone: '', // Mantido como string
     apelido: '',
     cep: '', // Mantido como string
+    tasks: [],
   };
 
   const [formData, setFormData] = useState<IDataUser>(initialFormData);
@@ -52,7 +53,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ fields, onSubmit }) => {
             type={field.type}
             id={field.name}
             name={field.name}
-            value={formData[field.name] || ''}
+         /*    value={formData[field.name] || ""} */
             placeholder={field.exemplo}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               handleChange(field.name, e.target.value)

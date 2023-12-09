@@ -1,12 +1,12 @@
 // FormsNewToDo.tsx
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { PostCreateTask } from '../services/tasks/PostCreateTask';
 
 import { IDataDefaultTask } from '../interfaces/IDataDefaultTask';
 import { editiPatch } from '../services/tasks/PatchTask';
 import ErrorCard from './ErrorCard';
 import { useAppContext } from '../hooks/InfoUser';
-import { GetUserId } from '../services/users/GetUserId';
+
 
 interface res {
     options: string
@@ -16,7 +16,7 @@ interface res {
 }
 
 const FormsNewToDo: React.FC<IDataDefaultTask & res> = (props) => {
-    const { data, setData, updateP, setUpdateP } = useAppContext();
+    const { updateP, setUpdateP } = useAppContext();
     const [formData, setFormData] = useState<IDataDefaultTask>({
         id: props.id,
         description: props.description,

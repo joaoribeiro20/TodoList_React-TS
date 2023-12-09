@@ -7,7 +7,7 @@ import "../styles/tasks/StyleFormsDinamic.scss"
 import "../styles/tasks/Filters.scss"
 import { BsSearch } from "react-icons/bs";
 import { useAppContext } from "../hooks/InfoUser";
-import { GetUserId } from "../services/users/GetUserId";
+
 import { GetAllTasksOneUser } from "../services/tasks/GetAllTaskOneUser";
 
 
@@ -21,7 +21,7 @@ const Filters: FC<FiltersProps> = ({  idUserCreateTask }) => {
   /* const [filteredTasks, setUpdateP] = useState<IDataDefaultTask[] | null>(null); */
   const [inputValue, setInputValue] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
-  const { data, setData, updateP, setUpdateP } = useAppContext();
+  const { setUpdateP } = useAppContext();
   const [selectedStatus, setSelectedStatus] = useState<string>('');
   const [testeBackp, setTesteBackp]= useState<IDataDefaultTask[]>([])
 

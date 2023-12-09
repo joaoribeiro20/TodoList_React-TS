@@ -16,8 +16,15 @@ export const CreateUser = async (Iforms:IDataUser): Promise<IDataUser> => {
       return response.data;
     } catch (error) {
       alert("Usuario Ja encontrado em nosso sistema")
-      console.log(error.response.data)
-      return error.response.data
-      throw error; // Rejeita a Promise para que a função fetchData possa lidar com o erro
+      return {  
+        id: '',
+        name: '',
+        email:'',
+        password:'',
+        telefone:'',
+        apelido:'',
+        cep:'',
+        tasks:[]}
+     
     }
   };

@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import { useAppContext } from "../hooks/InfoUser";
 import { GetUserId } from "../services/users/GetUserId";
 import Task from "../components/Task";
@@ -43,8 +43,8 @@ const ContainerTask: FC = () => {
   const handleDelete = (taskId: string) => {
     updateP && setUpdateP(Delete(taskId, updateP))
   }
-  const handleEdit = (taskId: string) => {}
-  const onstatus = async (taskId: string) => {}
+  const handleEdit = () => {}
+  const onstatus = async () => {}
 
 
   return (
@@ -59,10 +59,10 @@ const ContainerTask: FC = () => {
   {updateP ?
         updateP.map(task =>
           <Task
-            onstatus={() => onstatus(task.id || '')}
+            onstatus={() => onstatus()}
             key={task.id}
             tasks={task}
-            onedit={() => handleEdit(task.id || '')}
+            onedit={() => handleEdit()}
             onDelete={() => handleDelete(task.id || '')}
           />)
         : 'Carregando...'}

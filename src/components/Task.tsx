@@ -1,11 +1,10 @@
 import { BsFillPencilFill, BsFillTrash3Fill, BsPatchCheck, BsPatchCheckFill } from "react-icons/bs";
 import { IDataDefaultTask } from "../interfaces/IDataDefaultTask";
 import "../styles/tasks/styleTask.scss";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import FormsNewToDo from "./FormsNewToDo";
 import { useAppContext } from "../hooks/InfoUser";
-import { editTask } from "../interfaces/EditTask";
-import { GetAllTasksOneUser } from "../services/tasks/GetAllTaskOneUser";
+
 import { editiPatch } from "../services/tasks/PatchTask";
 
 interface FiltersProps {
@@ -19,7 +18,7 @@ interface FiltersProps {
 const Task: React.FC<FiltersProps> = ({ tasks, onDelete }) => {
     /*  const { statu, id, title, description, categories, onDelete, onedit, onstatus } = props;*/
      const [classDinamic, setClassDinamic] = useState(tasks?.statu ? "divMainComplet1" : "divMain"); 
-    const { data, setData, updateP, setUpdateP } = useAppContext();
+    const {  updateP, setUpdateP } = useAppContext();
     const [updatedTasks, setUpdatedTasks] = useState<IDataDefaultTask>();
     
   
@@ -50,7 +49,8 @@ const Task: React.FC<FiltersProps> = ({ tasks, onDelete }) => {
             console.log(teste2);
           
             // Make a PATCH request to update the task status using the editiPatch function
-            const teste = await editiPatch({
+            if(itemAlterado != undefined){
+                 const teste = await editiPatch({
               id: itemAlterado?.id,
               description: itemAlterado?.description,
               categories: itemAlterado?.categories,
@@ -58,13 +58,15 @@ const Task: React.FC<FiltersProps> = ({ tasks, onDelete }) => {
               authorId: itemAlterado?.authorId,
               statu: !itemAlterado?.statu, // Corrected from !itemAlterado?.id
             });
-          
-            // Set a dynamic class based on the task status
+          // Set a dynamic class based on the task status
             setClassDinamic(!teste2 ? 'divMainComplet1' : 'divMain');
           
             // Update the updateP state by removing the current task and adding the updated task
             const updatedTasks = updateP.filter((task) => task.id !== taskId);
-            setUpdateP([...updatedTasks, teste]);
+            setUpdateP(updatedTasks.concat(teste));
+            }
+           
+            
           }
 
     function handleEdit(taskId: string) {
@@ -93,21 +95,22 @@ const Task: React.FC<FiltersProps> = ({ tasks, onDelete }) => {
 
     return (
         <>
-            {
-                modalCreateToDo && (
+            {updatedTasks ?
+                modalCreateToDo ? (
                     <div>
                         <FormsNewToDo
-                            id={updatedTasks?.id!}
+                            id={updatedTasks.id!}
                             options="editTask"
                             statu={true}
-                            title={updatedTasks?.title!}
-                            description={updatedTasks?.description!}
-                            categories={updatedTasks?.categories!}
-                            authorId={updatedTasks?.authorId!}
+                            title={updatedTasks.title!}
+                            description={updatedTasks.description!}
+                            categories={updatedTasks.categories!}
+                            authorId={updatedTasks.authorId!}
                             /* updatePage={()=>{updatePage()}} */
                             statusModalVisivel={vizualizacao} />
                     </div>
-                )
+                ) : <h1>teste</h1>
+                : <h1>das droga</h1>
             }
             <div className={classDinamic}>
                 <div className="description">

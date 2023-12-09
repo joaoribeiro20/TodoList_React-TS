@@ -34,7 +34,7 @@ const MyContextProvider: React.FC<MyContextProviderProps> = ({ children }) => {
     cep:'0',
     tasks:[]
   });
-  const [updateP, setUpdateP] = useState([]);
+  const [updateP, setUpdateP] = useState<IDataDefaultTask[]>([]);
   return(
     <MyContext.Provider value={{updateP, setUpdateP, data, setData}}>
       {children}
